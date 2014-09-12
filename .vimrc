@@ -1,4 +1,5 @@
 "Zorig's vimrc file
+let mapleader=" "
 set runtimepath+=~/.vim
 execute pathogen#infect()
 filetype off 
@@ -40,7 +41,8 @@ set showmatch
 syntax enable
 set t_Co=256
 set background=dark
-color molokai
+colorscheme lucius
+hi Directory guifg=#00FFFF ctermfg=cyan
 
 " UTF-8 as standart
 set encoding=utf8
@@ -82,10 +84,15 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 "Emmet just for html/css
-let g:user_emmet_install_global = 0
+let g:user_emmet_install_global = 1
 autocmd FileType html,css EmmetInstall
 
 "NERDTree
 map <silent> <C-D> :NERDTreeToggle<CR>
 
-
+" airline
+""""""""""""""""""""""""""""""
+let g:airline_theme             = 'lucius'
+let g:airline_enable_branch     = 1
+let g:airline_enable_syntastic  = 1
+let g:airline_powerline_fonts   = 1
