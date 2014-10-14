@@ -1,5 +1,5 @@
 "Zorig's vimrc file
-let mapleader=" "
+let mapleader=","
 set runtimepath+=~/.vim
 execute pathogen#infect()
 filetype off 
