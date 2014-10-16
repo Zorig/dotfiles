@@ -43,6 +43,13 @@ set t_Co=256
 set background=dark
 colorscheme lucius
 hi Directory guifg=#00FFFF ctermfg=cyan
+" solarized highlight
+" set background=dark
+" let g:solarized_termtrans=1
+" let g:solarized_termcolors=256
+" let g:solarized_contrast="high"
+" let g:solarized_visibility="high"
+" colorscheme solarized
 
 " UTF-8 as standart
 set encoding=utf8
@@ -74,15 +81,6 @@ set laststatus=2
 " Spell check, press ss will toggle and untoggle spell checking
 map <leader>ss : setlocal spell!<cr>
 
-"--ENABLE PYTHON/DJANGO OMNICOMPLETE
-
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
 "Emmet just for html/css
 let g:user_emmet_install_global = 1
 autocmd FileType html,css EmmetInstall
@@ -96,3 +94,8 @@ let g:airline_theme             = 'lucius'
 let g:airline_enable_branch     = 1
 let g:airline_enable_syntastic  = 1
 let g:airline_powerline_fonts   = 1
+
+"CloseTag 
+autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
+autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako, source ~/.vim/bundle/closetag/plugin/closetag.vim
+
