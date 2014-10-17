@@ -1,21 +1,16 @@
 "Zorig's vimrc file
-let mapleader=","
-set runtimepath+=~/.vim
-execute pathogen#infect()
-filetype off 
-syntax on
-filetype plugin indent on
+
+"Vim conf
+set nu 					" Line number 
+let mapleader=","   	" Leader key
+set nocompatible 		" Enable Vim features
+set runtimepath+=~/.vim " Pointing vim directory
+execute pathogen#infect() 
+filetype on 			" Enable file type detection 
+syntax on 				" Enable syntax highlight
 " File type plugins
-filetype plugin on
-filetype indent on
-" Auto read setting
-set autoread
-
-" Line number 
-set nu
-
-" Set 7 line to the cursor
-set so=7
+filetype plugin on 		" Enable plugins
+filetype indent on 		" Enable indent
 
 " Turn on WiLd menu
 set wildmenu
@@ -43,13 +38,23 @@ set t_Co=256
 set background=dark
 colorscheme lucius
 hi Directory guifg=#00FFFF ctermfg=cyan
+":1 GUI only settings
+if has('gui_running')
 " solarized highlight
-" set background=dark
-" let g:solarized_termtrans=1
-" let g:solarized_termcolors=256
-" let g:solarized_contrast="high"
-" let g:solarized_visibility="high"
-" colorscheme solarized
+	set background=dark
+	let g:solarized_termtrans=1
+	let g:solarized_termcolors=256
+	let g:solarized_contrast="high"
+	let g:solarized_visibility="high"
+	let g:airline_theme='solarized'
+	let g:airline_enable_branch     = 1
+	let g:airline_enable_syntastic  = 1
+	let g:airline_powerline_fonts   = 1
+	set guioptions-=T             " Remove toolbar
+  	set guioptions-=l             " Remove scroll
+  	set guioptions-=L             " Remove scroll in splitted window
+	colorscheme solarized
+endif
 
 " UTF-8 as standart
 set encoding=utf8
@@ -86,7 +91,55 @@ let g:user_emmet_install_global = 1
 autocmd FileType html,css EmmetInstall
 
 "NERDTree
-map <silent> <C-D> :NERDTreeToggle<CR>
+" Fast toggle
+map <F2> :NERDTreeToggle<CR>
+
+" Common
+let g:NERDTreeMapOpenVSplit = 'a'
+let g:NERDTreeCaseSensitiveSort = 1
+let g:NERDTreeMouseMode = 3
+let g:NERDTreeWinPos = 'right'
+
+function! NERDTreeCustomIgnoreFilter(path)
+  if b:NERDTreeShowHidden ==# 0
+    let patterns = [
+          \ '\.min\.js$',
+          \ '\.min\.css$',
+          \ '\.eot$',
+          \ '\.svg$',
+          \ '\.ttf$',
+          \ '\.woff$',
+          \ '\.pyc$',
+          \]
+
+    let pathlist = [
+          \ $HOME . '/Downloads',
+          \ $HOME . '/Dropbox',
+          \ $HOME . '/Videos',
+          \ $HOME . '/Music',
+          \ $HOME . '/Pictures',
+          \ $HOME . '/Desktop',
+          \ $HOME . '/Documents',
+          \ $HOME . '/Public',
+          \ $HOME . '/Templates',
+          \ $HOME . '/Projects',	
+          \ $HOME . '/webprojs',
+          \ $HOME . '/opt',
+          \]
+
+    for p in pathlist
+      if a:path.pathSegments == split(p, "/")
+        return 1
+      endif
+    endfor
+
+    for p in patterns
+      if a:path.getLastPathComponent(0) =~# p
+        return 1
+      endif
+    endfor
+  endif
+endfunction
 
 " airline
 """"""""""""""""""""""""""""""
@@ -99,3 +152,5 @@ let g:airline_powerline_fonts   = 1
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
 autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako, source ~/.vim/bundle/closetag/plugin/closetag.vim
 
+"emmet vim remap
+imap mm <C-y>,
