@@ -122,9 +122,7 @@ function! NERDTreeCustomIgnoreFilter(path)
           \ $HOME . '/Documents',
           \ $HOME . '/Public',
           \ $HOME . '/Templates',
-          \ $HOME . '/Projects',	
           \ $HOME . '/webprojs',
-          \ $HOME . '/opt',
           \]
 
     for p in pathlist
@@ -154,3 +152,11 @@ autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako, source ~/.vim/b
 
 "emmet vim remap
 imap mm <C-y>,
+
+"Vim-Django
+let g:django_projects = '~/Projects' "Sets all projects under Project directory
+let g:django_activate_virtualenv = 1 "Try to activate associated virtualenv
+let g:django_activate_nerdtree = 1   "Try to open nerdtree at project
+autocmd FileType python set sw=4
+autocmd FileType python set ts=4
+autocmd FileType python set sts=4
