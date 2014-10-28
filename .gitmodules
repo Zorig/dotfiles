@@ -49,4 +49,7 @@
 [submodule "bundle/vim-django"]
 	path = bundle/vim-django
 	url = git://github.com/cwood/vim-django.git
+[submodule "bundle/vim-virtualenv"]
+	path = bundle/vim-virtualenv
+	url = git://github.com/jmcantrell/vim-virtualenv.git
 
