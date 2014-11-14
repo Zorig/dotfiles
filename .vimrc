@@ -11,6 +11,8 @@ syntax on 				" Enable syntax highlight
 " File type plugins
 filetype plugin on 		" Enable plugins
 filetype indent on 		" Enable indent
+let $PYTHONDONTWRITEBYTECODE = 1 " Python dont write .pyc, pyo
+let $PYTHONIOENCODING = 'utf-8'  " Python encoding= utf-8
 
 " Turn on WiLd menu
 set wildmenu
@@ -31,6 +33,10 @@ set hlsearch
 set incsearch
 " Show matching brackets when indicator over them
 set showmatch
+
+"Fold
+set foldmethod=indent
+set foldlevel=99
 
 " Syntax highlight
 syntax enable
@@ -122,7 +128,9 @@ function! NERDTreeCustomIgnoreFilter(path)
           \ $HOME . '/Documents',
           \ $HOME . '/Public',
           \ $HOME . '/Templates',
-          \ $HOME . '/webprojs',
+          \ $HOME . '/VirtualBox VMs',
+          \ $HOME . '/deja-dup',
+          \ $HOME . '/Story',
           \]
 
     for p in pathlist
@@ -151,10 +159,10 @@ autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=
 autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako, source ~/.vim/bundle/closetag/plugin/closetag.vim
 
 "emmet vim remap
-imap mm <C-y>,
+imap ;; <C-y>,
 
 "Vim-Django
-let g:django_projects = '~/Projects' "Sets all projects under Project directory
+let g:django_projects = '~/Projects/Django_' "Sets all projects under Project directory
 let g:django_activate_virtualenv = 1 "Try to activate associated virtualenv
 let g:django_activate_nerdtree = 1   "Try to open nerdtree at project
 autocmd FileType python set sw=4
