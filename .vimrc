@@ -165,6 +165,15 @@ imap ;; <C-y>,
 let g:django_projects = '~/Projects/Django_' "Sets all projects under Project directory
 let g:django_activate_virtualenv = 1 "Try to activate associated virtualenv
 let g:django_activate_nerdtree = 1   "Try to open nerdtree at project
-autocmd FileType python set sw=4
-autocmd FileType python set ts=4
-autocmd FileType python set sts=4
+
+"tab space
+autocmd FileType python setlocal sw=4 ts=4 sts=4 expandtab
+autocmd FileType html,jinja,css setlocal ts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=4 sw=4 sts=0 noexpandtab
+
+"folding
+nmap <space> za
+set foldlevelstart=0
+set foldnestmax=2
+let python_fold=1 	"Python fold
+let javaScript_fold=1 	"Javascript fold
