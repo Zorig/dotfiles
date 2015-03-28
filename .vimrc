@@ -9,6 +9,9 @@ execute pathogen#infect()
 filetype on 			" Enable file type detection 
 syntax on 				" Enable syntax highlight
 set smartindent
+nmap <c-s> :w<CR>
+imap <c-s> <Esc>:w<CR>a
+nmap <c-q> :wqa<CR>
 " File type plugins
 filetype plugin on 		" Enable plugins
 filetype indent on 		" Enable indent
