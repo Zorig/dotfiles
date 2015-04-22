@@ -16,9 +16,6 @@
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = git://github.com/ervandew/supertab.git
-[submodule "bundle/vim-lucius"]
-	path = bundle/vim-lucius
-	url = git://github.com/jonathanfilip/vim-lucius.git 
 [submodule "bundle/vim-multiple-cursors"]
 	path = bundle/vim-multiple-cursors
 	url = git://github.com/terryma/vim-multiple-cursors.git
@@ -37,9 +34,6 @@
 [submodule "bundle/pyflakes-vim"]
 	path = bundle/pyflakes
 	url = git://github.com/kevinw/pyflakes-vim.git
-[submodule "bundle/solarized"]
-	path = bundle/solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
@@ -67,3 +61,6 @@
 [submodule "bundle/vim-indent-guides"]
 	path = bundle/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "bundle/vim-lapis256"]
+	path = bundle/vim-lapis256
+	url = https://github.com/andrwb/vim-lapis256.git
