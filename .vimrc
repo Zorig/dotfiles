@@ -9,9 +9,9 @@ execute pathogen#infect()
 filetype on 			" Enable file type detection 
 syntax on 				" Enable syntax highlight
 set smartindent
-nmap <c-s> :w<CR>
-imap <c-s> <Esc>:w<CR>a
-nmap <c-q> :wqa<CR>
+nmap <c-s> :w<CR>       " ctrl + s to save in normal mode
+imap <c-s> <Esc>:w<CR>a " ctrl + s to save in insert mode
+nmap <c-q> :q<CR>       " ctrl + q to quit
 " File type plugins
 filetype plugin on 		" Enable plugins
 filetype indent on 		" Enable indent
@@ -42,7 +42,7 @@ set showmatch
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme lucius
+colorscheme lapis256
 hi Directory guifg=#00FFFF ctermfg=cyan
 ":1 GUI only settings
 if has('gui_running')
@@ -52,14 +52,14 @@ if has('gui_running')
 	let g:solarized_termcolors=256
 	let g:solarized_contrast="high"
 	let g:solarized_visibility="high"
-	let g:airline_theme='solarized'
-	let g:airline_enable_branch     = 1
-	let g:airline_enable_syntastic  = 1
+	let g:airline_theme='luna'
+	let g:airline#extensions#branch#enabled = 1
+	let g:airline#extensions#syntastic#enabled = 1
 	let g:airline_powerline_fonts   = 1
 	set guioptions-=T             " Remove toolbar
   	set guioptions-=l             " Remove scroll
   	set guioptions-=L             " Remove scroll in splitted window
-	colorscheme solarized
+	colorscheme underwater
 endif
 
 " UTF-8 as standart
@@ -129,7 +129,6 @@ function! NERDTreeCustomIgnoreFilter(path)
           \ $HOME . '/Templates',
           \ $HOME . '/VirtualBox VMs',
           \ $HOME . '/deja-dup',
-          \ $HOME . '/Story',
           \]
 
     for p in pathlist
@@ -148,14 +147,20 @@ endfunction
 
 " airline
 """"""""""""""""""""""""""""""
-let g:airline_theme             = 'lucius'
-let g:airline_enable_branch     = 1
-let g:airline_enable_syntastic  = 1
+let g:airline_theme             = 'luna'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
 let g:airline_powerline_fonts   = 1
+":1 Plugin - Syntastic
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height=3
 
 "CloseTag 
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
-autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako, source ~/.vim/bundle/closetag/plugin/closetag.vim
+autocmd FileType html,xhtml,xml,htmldjango,jinjahtml, jinja,eruby,mako, source ~/.vim/bundle/closetag/plugin/closetag.vim
 
 "emmet vim remap
 imap ;; <C-y>,
