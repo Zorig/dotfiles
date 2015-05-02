@@ -51,8 +51,8 @@ if has('gui_running')
 	let g:solarized_termtrans=1
 	let g:solarized_termcolors=256
 	let g:solarized_contrast="high"
-	let g:solarized_visibility="high"
-	let g:airline_theme='luna'
+	let g:solarized_visibility = "high"
+	let g:airline_theme = ''
 	let g:airline#extensions#branch#enabled = 1
 	let g:airline#extensions#syntastic#enabled = 1
 	let g:airline_powerline_fonts   = 1
@@ -147,7 +147,7 @@ endfunction
 
 " airline
 """"""""""""""""""""""""""""""
-let g:airline_theme             = 'luna'
+let g:airline_theme             = 'lucius'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline_powerline_fonts   = 1
@@ -160,7 +160,7 @@ let g:syntastic_loc_list_height=3
 
 "CloseTag 
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
-autocmd FileType html,xhtml,xml,htmldjango,jinjahtml, jinja,eruby,mako, source ~/.vim/bundle/closetag/plugin/closetag.vim
+autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,jinja,eruby,mako, source ~/.vim/bundle/closetag/plugin/closetag.vim
 
 "emmet vim remap
 imap ;; <C-y>,
