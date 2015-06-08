@@ -10,8 +10,14 @@ filetype on 			" Enable file type detection
 syntax on 				" Enable syntax highlight
 set smartindent
 nmap <c-s> :w<CR>       " ctrl + s to save in normal mode
-imap <c-s> <Esc>:w<CR>a " ctrl + s to save in insert mode
-nmap <c-q> :q<CR>       " ctrl + q to quit
+imap <-s> <Esc>:w<CR>a " ctrl + s to save in insert mode
+nmap <-q> :q<CR>       " ctrl + q to quit
+vmap <Leader>y "+y      " space + y to copy
+nmap <Leader>p "+p      " space + p to paste in normal mode
+nmap <Leader>P "+P      " space + p to paste in normal mode 
+vmap <Leader>p "+p      " space + p to paste in visual mode
+vmap <Leader>P "+P      " space + p to paste in visual mode
+
 " File type plugins
 filetype plugin on 		" Enable plugins
 filetype indent on 		" Enable indent
@@ -99,6 +105,7 @@ autocmd FileType html,css EmmetInstall
 " Fast toggle
 map <F2> :NERDTreeToggle<CR>
 nmap <W> <C-W>
+
 " Common
 let g:NERDTreeMapOpenVSplit = 'a'
 let g:NERDTreeCaseSensitiveSort = 1
