@@ -12,11 +12,11 @@ set smartindent
 nmap <c-s> :w<CR>       " ctrl + s to save in normal mode
 imap <c-s> <Esc>:w<CR>a " ctrl + s to save in insert mode
 nmap <c-q> :q<CR>       " ctrl + q to quit
-vmap <Leader>y "+y      " space + y to copy
-nmap <Leader>p "+p      " space + p to paste in normal mode
-nmap <Leader>P "+P      " space + p to paste in normal mode 
-vmap <Leader>p "+p      " space + p to paste in visual mode
-vmap <Leader>P "+P      " space + p to paste in visual mode
+vmap <Leader>y "+y      ' space + y to copy
+nmap <Leader>p "+p      ' space + p to paste in normal mode
+nmap <Leader>P "+P      ' space + p to paste in normal mode 
+vmap <Leader>p "+p      ' space + p to paste in visual mode
+vmap <Leader>P "+P      ' space + p to paste in visual mode
 
 " File type plugins
 filetype plugin on 		" Enable plugins
