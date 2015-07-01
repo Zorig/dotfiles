@@ -1,66 +1,96 @@
+;Zorig's vim submodule
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
+
 [submodule "bundle/emmet-vim"]
 	path = bundle/emmet-vim
 	url = git://github.com/mattn/emmet-vim.git
+
 [submodule "bundle/ctrlp.vim"]
 	path = bundle/ctrlp.vim
 	url = git://github.com/kien/ctrlp.vim.git
+
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
+
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = git://github.com/bling/vim-airline.git
+
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = git://github.com/ervandew/supertab.git
+
 [submodule "bundle/vim-multiple-cursors"]
 	path = bundle/vim-multiple-cursors
 	url = git://github.com/terryma/vim-multiple-cursors.git
+
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
+
 [submodule "bundle/vim-jinja"]
 	path = bundle/vim-jinja
 	url = git://github.com/mitsuhiko/vim-jinja.git
+
 [submodule "bundle/delmitmate"]
 	path = bundle/delmitmate
 	url = git://github.com/Raimondi/delimitMate.git
+
 [submodule "bundle/closetag"]
 	path = bundle/closetag
 	url = git://github.com/docunext/closetag.vim.git
+
 [submodule "bundle/pyflakes-vim"]
 	path = bundle/pyflakes
 	url = git://github.com/kevinw/pyflakes-vim.git
+
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+
 [submodule "bundle/vim-django"]
 	path = bundle/vim-django
 	url = git://github.com/cwood/vim-django.git
+
 [submodule "bundle/vim-virtualenv"]
 	path = bundle/vim-virtualenv
 	url = git://github.com/jmcantrell/vim-virtualenv.git
+
 [submodule "bundle/MatchTagAlways"]
 	path = bundle/MatchTagAlways
 	url = git://github.com/Valloric/MatchTagAlways.git
+
 [submodule "bundle/tlib_vim"]
 	path = bundle/tlib_vim
 	url = git://github.com/tomtom/tlib_vim.git
+
 [submodule "bundle/vim-addon-mw-utils.git"]
 	path = bundle/vim-addon-mw-utils
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
+
 [submodule "bundle/vim-snipmate"]
 	path = bundle/vim-snipmate
 	url = git://github.com/garbas/vim-snipmate.git
+
 [submodule "bundle/SimpylFold"]
 	path = bundle/SimpylFold
 	url = https://github.com/tmhedberg/SimpylFold.git
+
 [submodule "bundle/vim-indent-guides"]
 	path = bundle/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
+
 [submodule "bundle/vim-lapis256"]
 	path = bundle/vim-lapis256
 	url = https://github.com/andrwb/vim-lapis256.git
+
+[submodule "bundle/vim-jsx"]
+	path = bundle/vim-jsx
+	url = https://github.com/mxw/vim-jsx.git
+
+[submodule "bundle/vim-esformatter"]
+	path = bundle/vim-esformatter
+	url = https://github.com/millermedeiros/vim-esformatter.git
