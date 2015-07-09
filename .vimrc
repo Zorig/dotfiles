@@ -12,11 +12,11 @@ set smartindent
 nmap <c-s> :w<CR>       " ctrl + s to save in normal mode
 imap <c-s> <Esc>:w<CR>a " ctrl + s to save in insert mode
 nmap <c-q> :q<CR>       " ctrl + q to quit
-vmap <Leader>y "+y      ' space + y to copy
-nmap <Leader>p "+p      ' space + p to paste in normal mode
-nmap <Leader>P "+P      ' space + p to paste in normal mode 
-vmap <Leader>p "+p      ' space + p to paste in visual mode
-vmap <Leader>P "+P      ' space + p to paste in visual mode
+vmap <Leader>y "+y      " space + y to copy
+nmap <Leader>p "+p      " space + p to paste in normal mode
+nmap <Leader>P "+P      " space + p to paste in normal mode 
+vmap <Leader>p "+p      " space + p to paste in visual mode
+vmap <Leader>P "+P      " space + p to paste in visual mode
 
 " File type plugins
 filetype plugin on 		" Enable plugins
@@ -180,7 +180,7 @@ let g:django_activate_nerdtree = 1   "Try to open nerdtree at project
 "tab space
 autocmd FileType python,ruby,php,java setlocal sw=4 ts=4 sts=4 expandtab
 autocmd FileType html,jinja,css,htmljinja setlocal ts=2 sw=2 expandtab
-autocmd FileType javascript setlocal ts=2 sw=2 sts=0 noexpandtab
+autocmd FileType javascript setlocal ts=2 sw=2 sts=0 expandtab
 
 "folding
 set foldmethod=indent
