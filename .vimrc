@@ -166,16 +166,11 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height=3
 
 "CloseTag 
-autocmd FileType html,htmldjango,jinjahtml,eruby,mako,jsx,js,javascript.jsx let b:closetag_html_style=1
-autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,jinja,eruby,mako,jsx,js,javascript.jsx source ~/.vim/bundle/closetag/plugin/closetag.vim
+autocmd FileType html,htmldjango,jinjahtml,eruby,mako,jsx,js let b:closetag_html_style=1
+autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,jinja,eruby,mako,jsx,js source ~/.vim/bundle/closetag/plugin/closetag.vim
 
 "emmet vim remap
 imap ;; <C-y>,
-
-"Vim-Django
-let g:django_projects = '~/projects/django' "Sets all projects under Project directory
-let g:django_activate_virtualenv = 1 "Try to activate associated virtualenv
-let g:django_activate_nerdtree = 1   "Try to open nerdtree at project
 
 "tab space
 autocmd FileType python,ruby,php,java setlocal sw=4 ts=4 sts=4 expandtab
