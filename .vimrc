@@ -188,15 +188,6 @@ let python_fold=1 	"Python fold
 let javaScript_fold=1 	"Javascript fold
 let html_fold=1 "HTML fold
 autocmd FileType html,jinja,css,htmljinja setlocal foldmethod=indent
-augroup vimrc
-  autocmd!
-augroup END
-
-
-" Easy fold toggle for enter key. (Exclude `quickfix` filetype)
-autocmd vimrc BufEnter * if &filetype == 'qf' |unmap <CR>|    endif
-autocmd vimrc BufEnter * if &filetype != 'qf' | nmap <CR> za| endif
-" endfold
 
 "indent guide
 let g:indent_guides_start_level=2
