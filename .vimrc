@@ -180,6 +180,7 @@ autocmd FileType javascript setlocal ts=2 sw=2 sts=0 expandtab
 "folding
 set foldmethod=indent
 set foldlevel=99
+set fillchars=vert:\|,fold:\  " Make foldtext more clean
 nmap <space> za
 set foldlevelstart=0
 set foldnestmax=5
@@ -187,6 +188,15 @@ let python_fold=1 	"Python fold
 let javaScript_fold=1 	"Javascript fold
 let html_fold=1 "HTML fold
 autocmd FileType html,jinja,css,htmljinja setlocal foldmethod=indent
+augroup vimrc
+  autocmd!
+augroup END
+
+
+" Easy fold toggle for enter key. (Exclude `quickfix` filetype)
+autocmd vimrc BufEnter * if &filetype == 'qf' |unmap <CR>|    endif
+autocmd vimrc BufEnter * if &filetype != 'qf' | nmap <CR> za| endif
+" endfold
 
 "indent guide
 let g:indent_guides_start_level=2
