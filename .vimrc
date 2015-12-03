@@ -18,6 +18,51 @@ nmap <Leader>P "+P      " space + p to paste in normal mode
 vmap <Leader>p "+p      " space + p to paste in visual mode
 vmap <Leader>P "+P      " space + p to paste in visual mode
 
+
+"NERDTree
+" Fast toggle
+map <F2> :NERDTreeToggle<CR>
+
+" NerdTree
+let g:NERDTreeMapOpenVSplit = 'a'
+let g:NERDTreeCaseSensitiveSort = 1
+let g:NERDTreeMouseMode = 3
+let g:NERDTreeWinPos = 'right'
+let g:NERDTreeBookmarksFile = $HOME . '/.vim/.nerdtree-bookmarks'
+nmap w <C-w>
+
+function! NERDTreeCustomIgnoreFilter(path)
+  if b:NERDTreeShowHidden ==# 1
+    return 0
+  endif
+
+  let pathlist = [
+        \ $HOME . '/Desktop',
+        \ $HOME . '/Documents',
+        \ $HOME . '/Downloads',
+        \ $HOME . '/Dropbox',
+        \ $HOME . '/Music',
+        \ $HOME . '/Pictures',
+        \ $HOME . '/Videos',
+        \]
+
+  let patterns = [
+        \ '\.min\.js$',
+        \ '\.min\.css$',
+        \]
+
+  for p in pathlist
+    if a:path.pathSegments == split(p, '/')
+      return 1
+    endif
+  endfor
+
+  for p in patterns
+    if a:path.getLastPathComponent(0) =~# p
+      return 1
+    endif
+  endfor
+endfunction
 " File type plugins
 filetype plugin on 		" Enable plugins
 filetype indent on 		" Enable indent
@@ -28,7 +73,7 @@ let $PYTHONIOENCODING = 'utf-8'  " Python encoding= utf-8
 set wildmenu
 
 " Ignore compiled files
-set wildignore=*.o,*~,*.pyc
+set wildignore=*.o,*~,*.pyc,*.min.js
 if has("win16") || has("win32")
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
@@ -48,23 +93,20 @@ set showmatch
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme lapis256
+colorscheme material
 hi Directory guifg=#00FFFF ctermfg=cyan
 ":1 GUI only settings
 if has('gui_running')
-" solarized highlight
 	set background=dark
-	let g:solarized_termtrans=1
-	let g:solarized_termcolors=256
-	let g:solarized_contrast="high"
-	let g:solarized_visibility = "high"
-	let g:airline_theme = ''
 	let g:airline#extensions#branch#enabled = 1
 	let g:airline#extensions#syntastic#enabled = 1
 	let g:airline_powerline_fonts   = 1
 	set guioptions-=T             " Remove toolbar
   	set guioptions-=l             " Remove scroll
   	set guioptions-=L             " Remove scroll in splitted window
+  	set guioptions-=m             " Remove menu bar
+	set guicursor+=a:blinkon0     " Disable cursor blinking
+	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 	colorscheme underwater
 endif
 
@@ -101,60 +143,10 @@ map <leader>ss : setlocal spell!<cr>
 let g:user_emmet_install_global = 1
 autocmd FileType html,css EmmetInstall
 
-"NERDTree
-" Fast toggle
-map <F2> :NERDTreeToggle<CR>
-nmap <W> <C-W>
-
-" Common
-let g:NERDTreeMapOpenVSplit = 'a'
-let g:NERDTreeCaseSensitiveSort = 1
-let g:NERDTreeMouseMode = 3
-let g:NERDTreeWinPos = 'right'
-nmap w <C-w>
-function! NERDTreeCustomIgnoreFilter(path)
-  if b:NERDTreeShowHidden ==# 0
-    let patterns = [
-          \ '\.min\.js$',
-          \ '\.min\.css$',
-          \ '\.eot$',
-          \ '\.svg$',
-          \ '\.ttf$',
-          \ '\.woff$',
-          \ '\.pyc$',
-          \]
-
-    let pathlist = [
-          \ $HOME . '/Downloads',
-          \ $HOME . '/Dropbox',
-          \ $HOME . '/Videos',
-          \ $HOME . '/Music',
-          \ $HOME . '/Pictures',
-          \ $HOME . '/Desktop',
-          \ $HOME . '/Documents',
-          \ $HOME . '/Public',
-          \ $HOME . '/Templates',
-          \ $HOME . '/VirtualBox VMs',
-          \ $HOME . '/deja-dup',
-          \]
-
-    for p in pathlist
-      if a:path.pathSegments == split(p, "/")
-        return 1
-      endif
-    endfor
-
-    for p in patterns
-      if a:path.getLastPathComponent(0) =~# p
-        return 1
-      endif
-    endfor
-  endif
-endfunction
 
 " airline
 """"""""""""""""""""""""""""""
-let g:airline_theme             = 'lucius'
+let g:airline_theme             = 'tomorrow'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline_powerline_fonts   = 1
@@ -174,8 +166,7 @@ imap ;; <C-y>,
 
 "tab space
 autocmd FileType python,ruby,php,java setlocal sw=4 ts=4 sts=4 expandtab
-autocmd FileType html,jinja,css,htmljinja setlocal ts=2 sw=2 expandtab
-autocmd FileType javascript setlocal ts=2 sw=2 sts=0 expandtab
+autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript setlocal ts=2 sw=2 expandtab
 
 "folding
 set foldmethod=indent
@@ -183,14 +174,28 @@ set foldlevel=99
 set fillchars=vert:\|,fold:\  " Make foldtext more clean
 nmap <space> za
 set foldlevelstart=0
-set foldnestmax=5
+set foldnestmax=7
 let python_fold=1 	"Python fold
+let python_higlight_all=1
 let javaScript_fold=1 	"Javascript fold
 let html_fold=1 "HTML fold
-autocmd FileType html,jinja,css,htmljinja setlocal foldmethod=indent
+autocmd FileType html,jinja,css,htmljinja,htmldjango setlocal foldmethod=indent
 
 "indent guide
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 hi IndentGuidesOdd ctermbg=lightgray
 hi IndentGuidesEven ctermbg=blue
+
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+let python_higlight_all=1

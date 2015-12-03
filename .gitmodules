@@ -79,10 +79,6 @@
 	path = bundle/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
 
-[submodule "bundle/vim-lapis256"]
-	path = bundle/vim-lapis256
-	url = https://github.com/andrwb/vim-lapis256.git
-
 [submodule "bundle/vim-jsx"]
 	path = bundle/vim-jsx
 	url = https://github.com/mxw/vim-jsx.git
@@ -90,3 +86,9 @@
 [submodule "bundle/vim-esformatter"]
 	path = bundle/vim-esformatter
 	url = https://github.com/millermedeiros/vim-esformatter.git
+[submodule "material.vim"]
+	path = material.vim
+	url = git@github.com:jscappini/material.vim.git
+[submodule "bundle/vim-django"]
+	path = bundle/vim-django
+	url = git@github.com:cwood/vim-django.git
