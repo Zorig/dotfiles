@@ -86,9 +86,15 @@
 [submodule "bundle/vim-esformatter"]
 	path = bundle/vim-esformatter
 	url = https://github.com/millermedeiros/vim-esformatter.git
-[submodule "material.vim"]
-	path = material.vim
-	url = git@github.com:jscappini/material.vim.git
+
 [submodule "bundle/vim-django"]
 	path = bundle/vim-django
 	url = git@github.com:cwood/vim-django.git
+
+[submodule "bundle/vim-surround"]
+	path = bundle/vim-surround
+	url = git@github.com:tpope/vim-surround.git
+
+[submodule "bundle/vim-tomorrow-theme"]
+	path = bundle/vim-tomorrow-theme
+	url = git@github.com:chriskempson/vim-tomorrow-theme.git

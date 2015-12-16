@@ -93,7 +93,7 @@ set showmatch
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme material
+colorscheme Tomorrow-Night
 hi Directory guifg=#00FFFF ctermfg=cyan
 ":1 GUI only settings
 if has('gui_running')
