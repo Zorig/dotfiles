@@ -153,7 +153,7 @@ let g:airline_powerline_fonts   = 1
 ":1 Plugin - Syntastic
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height=3
 

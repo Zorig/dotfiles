@@ -43,10 +43,6 @@
 	path = bundle/closetag
 	url = git://github.com/docunext/closetag.vim.git
 
-[submodule "bundle/pyflakes-vim"]
-	path = bundle/pyflakes
-	url = git://github.com/kevinw/pyflakes-vim.git
-
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
@@ -86,10 +82,6 @@
 [submodule "bundle/vim-esformatter"]
 	path = bundle/vim-esformatter
 	url = https://github.com/millermedeiros/vim-esformatter.git
-
-[submodule "bundle/vim-django"]
-	path = bundle/vim-django
-	url = git@github.com:cwood/vim-django.git
 
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
