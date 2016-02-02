@@ -6,7 +6,7 @@ VIM text editor
 
 _if necessary rename directory .vim and copy "**.vimrc**" file in the home directory_ by following command
 			
-	cp ~/.vim/.vimrc ~/
+	ln -s ~/.vim/vimrc ~/.vimrc
 ---
 After sometime i made some changes
 so you have to install pylint, flake8 and jedi in order to use syntastic, jedi-vim autocompletion
