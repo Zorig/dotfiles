@@ -75,7 +75,7 @@ set wildmenu
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc,*.min.js
 if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
+    set wildignore+=.git\*,.hg\*,.svn\*,node_modules\*
 endif
 
 " Current position showing
@@ -93,7 +93,8 @@ set showmatch
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme Tomorrow-Night
+colorscheme onedark
+let g:onedark_termcolors=16
 hi Directory guifg=#00FFFF ctermfg=cyan
 ":1 GUI only settings
 if has('gui_running')
@@ -106,7 +107,7 @@ if has('gui_running')
   	set guioptions-=L             " Remove scroll in splitted window
   	set guioptions-=m             " Remove menu bar
 	set guicursor+=a:blinkon0     " Disable cursor blinking
-	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
+	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 	colorscheme underwater
 endif
 
@@ -153,7 +154,7 @@ let g:airline_powerline_fonts   = 1
 ":1 Plugin - Syntastic
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height=3
 
@@ -179,7 +180,7 @@ let python_fold=1 	"Python fold
 let python_higlight_all=1
 let javaScript_fold=1 	"Javascript fold
 let html_fold=1 "HTML fold
-autocmd FileType html,jinja,css,htmljinja,htmldjango setlocal foldmethod=indent
+autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript.jsx setlocal foldmethod=indent
 
 "indent guide
 let g:indent_guides_start_level=2
