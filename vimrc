@@ -1,12 +1,45 @@
 "Zorig's vimrc file
 
 "Vim conf
-set nu 					" Line number 
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'mattn/emmet-vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'ervandew/supertab'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mitsuhiko/vim-jinja'
+Plugin 'Raimondi/delimitMate'
+Plugin 'docunext/closetag.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/MatchTagAlways'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/underwater-mod'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'joshdick/onedark.vim'
+Plugin 'joshdick/airline-onedark.vim'
+call vundle#end()
+filetype plugin indent on    " required
+set nu 					" Line number
 let mapleader=","   	" Leader key
 set nocompatible 		" Enable Vim features
-set runtimepath+=~/.vim " Pointing vim directory
-execute pathogen#infect() 
-filetype on 			" Enable file type detection 
+
+
+filetype on 			" Enable file type detection
 syntax on 				" Enable syntax highlight
 set smartindent
 nmap <c-s> :w<CR>       " ctrl + s to save in normal mode
@@ -14,7 +47,7 @@ imap <c-s> <Esc>:w<CR>a " ctrl + s to save in insert mode
 nmap <c-q> :q<CR>       " ctrl + q to quit
 vmap <Leader>y "+y      " space + y to copy
 nmap <Leader>p "+p      " space + p to paste in normal mode
-nmap <Leader>P "+P      " space + p to paste in normal mode 
+nmap <Leader>P "+P      " space + p to paste in normal mode
 vmap <Leader>p "+p      " space + p to paste in visual mode
 vmap <Leader>P "+P      " space + p to paste in visual mode
 
@@ -93,6 +126,7 @@ set showmatch
 syntax enable
 set t_Co=256
 set background=dark
+syntax on
 colorscheme onedark
 let g:onedark_termcolors=16
 hi Directory guifg=#00FFFF ctermfg=cyan
@@ -102,6 +136,7 @@ if has('gui_running')
 	let g:airline#extensions#branch#enabled = 1
 	let g:airline#extensions#syntastic#enabled = 1
 	let g:airline_powerline_fonts   = 1
+	let g:airline_theme='onedark'
 	set guioptions-=T             " Remove toolbar
   	set guioptions-=l             " Remove scroll
   	set guioptions-=L             " Remove scroll in splitted window
@@ -114,6 +149,7 @@ endif
 " UTF-8 as standart
 set encoding=utf8
 
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 " 1tab = 4spaces
 set shiftwidth=4
 set tabstop=4
@@ -121,19 +157,19 @@ set tabstop=4
 " Linebreak on 500 characters
 set lbr
 set tw=500
-set ai "Auto indent 
+set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
 " Map <Space> to / (search) and Shift-<Space> to ? (backwards search)
 map <space> /
-map <s-space> ? 
+map <s-space> ?
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 " Always show status line
 set laststatus=2
 
@@ -147,7 +183,7 @@ autocmd FileType html,css EmmetInstall
 
 " airline
 """"""""""""""""""""""""""""""
-let g:airline_theme             = 'tomorrow'
+let g:airline_theme='onedark'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline_powerline_fonts   = 1
@@ -158,7 +194,7 @@ let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height=3
 
-"CloseTag 
+"CloseTag
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako,jsx,js let b:closetag_html_style=1
 autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,jinja,eruby,mako,jsx,js source ~/.vim/bundle/closetag/plugin/closetag.vim
 
