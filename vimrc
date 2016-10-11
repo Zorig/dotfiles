@@ -32,6 +32,7 @@ Plugin 'vim-scripts/underwater-mod'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'joshdick/onedark.vim'
 Plugin 'joshdick/airline-onedark.vim'
+Plugin 'joukevandermaas/vim-ember-hbs'
 call vundle#end()
 filetype plugin indent on    " required
 set nu 					" Line number
@@ -203,7 +204,7 @@ imap ;; <C-y>,
 
 "tab space
 autocmd FileType python,ruby,php,java setlocal sw=4 ts=4 sts=4 expandtab
-autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript setlocal ts=2 sw=2 expandtab
+autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript,hbs setlocal ts=2 sw=2 expandtab
 
 "folding
 set foldmethod=indent
