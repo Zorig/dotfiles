@@ -63,6 +63,7 @@ let g:NERDTreeCaseSensitiveSort = 1
 let g:NERDTreeMouseMode = 3
 let g:NERDTreeWinPos = 'right'
 let g:NERDTreeBookmarksFile = $HOME . '/.vim/.nerdtree-bookmarks'
+let g:NERDTreeIgnore=['\~$', 'node_modules', '.git', 'tmp', 'bower_components' ]
 nmap w <C-w>
 
 function! NERDTreeCustomIgnoreFilter(path)
@@ -108,6 +109,7 @@ set wildmenu
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc,*.min.js
+set wildignore+=.git\*,.hg\*,.svn\*,node_modules\*
 if has("win16") || has("win32")
     set wildignore+=.git\*,.hg\*,.svn\*,node_modules\*
 endif
