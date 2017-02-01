@@ -2,3 +2,6 @@ bundle
 colors
 *.png
 *.jpg
+tags
+/.nerdtree-bookmarks
+
