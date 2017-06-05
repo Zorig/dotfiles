@@ -2,7 +2,7 @@
 
 "Vim conf
 set nocompatible              " be iMproved, required
-filetype off                  " required
+filetype on                  " required
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -33,6 +33,8 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'joshdick/onedark.vim'
 Plugin 'joshdick/airline-onedark.vim'
 Plugin 'joukevandermaas/vim-ember-hbs'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'cwood/vim-django'
 call vundle#end()
 filetype plugin indent on    " required
 set nu 					" Line number
@@ -43,14 +45,15 @@ set nocompatible 		" Enable Vim features
 filetype on 			" Enable file type detection
 syntax on 				" Enable syntax highlight
 set smartindent
+set cursorline          " highlight current line
 nmap <c-s> :w<CR>       " ctrl + s to save in normal mode
 imap <c-s> <Esc>:w<CR>a " ctrl + s to save in insert mode
 nmap <c-q> :q<CR>       " ctrl + q to quit
-vmap <Leader>y "+y      " space + y to copy
-nmap <Leader>p "+p      " space + p to paste in normal mode
-nmap <Leader>P "+P      " space + p to paste in normal mode
-vmap <Leader>p "+p      " space + p to paste in visual mode
-vmap <Leader>P "+P      " space + p to paste in visual mode
+vmap <Leader>y "+y      " , + y to copy
+nmap <Leader>p "+p      " , + p to paste in normal mode
+nmap <Leader>P "+P      " , + p to paste in normal mode
+vmap <Leader>p "+p      " , + p to paste in visual mode
+vmap <Leader>P "+P      " , + p to paste in visual mode
 
 
 "NERDTree
@@ -226,3 +229,11 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 hi IndentGuidesOdd ctermbg=lightgray
 hi IndentGuidesEven ctermbg=blue
+"django
+let g:django_projects = '~/projects' "Sets all projects under project
+let g:django_activate_virtualenv = 1 "Try to activate the associated virtualenv
+let g:django_activate_nerdtree = 1 "Try to open nerdtree at the project root.
+
+let g:mta_filetypes = {'html': 1, 'jinja': 1, 'xml': 1}
+let g:mta_use_matchparan_group = 1
+let g:mta_set_default_matchtag_color = 1
