@@ -35,6 +35,7 @@ Plugin 'joshdick/airline-onedark.vim'
 Plugin 'joukevandermaas/vim-ember-hbs'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'cwood/vim-django'
+Plugin 'davidhalter/jedi-vim'
 call vundle#end()
 filetype plugin indent on    " required
 set nu 					" Line number
