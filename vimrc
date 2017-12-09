@@ -28,14 +28,12 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/underwater-mod'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'joshdick/onedark.vim'
-Plugin 'joshdick/airline-onedark.vim'
 Plugin 'joukevandermaas/vim-ember-hbs'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'cwood/vim-django'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'dracula/vim'
 call vundle#end()
 filetype plugin indent on    " required
 set nu 					" Line number
@@ -134,8 +132,7 @@ syntax enable
 set t_Co=256
 set background=dark
 syntax on
-colorscheme onedark
-let g:onedark_termcolors=16
+color dracula
 hi Directory guifg=#00FFFF ctermfg=cyan
 ":1 GUI only settings
 if has('gui_running')
@@ -143,14 +140,12 @@ if has('gui_running')
 	let g:airline#extensions#branch#enabled = 1
 	let g:airline#extensions#syntastic#enabled = 1
 	let g:airline_powerline_fonts   = 1
-	let g:airline_theme='onedark'
 	set guioptions-=T             " Remove toolbar
   	set guioptions-=l             " Remove scroll
   	set guioptions-=L             " Remove scroll in splitted window
   	set guioptions-=m             " Remove menu bar
 	set guicursor+=a:blinkon0     " Disable cursor blinking
 	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
-	colorscheme underwater
 endif
 
 " UTF-8 as standart
@@ -190,7 +185,6 @@ autocmd FileType html,css EmmetInstall
 
 " airline
 """"""""""""""""""""""""""""""
-let g:airline_theme='onedark'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline_powerline_fonts   = 1
