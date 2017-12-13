@@ -31,7 +31,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'joukevandermaas/vim-ember-hbs'
 Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'cwood/vim-django'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'dracula/vim'
 call vundle#end()
