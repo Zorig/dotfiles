@@ -190,10 +190,11 @@ let g:airline_powerline_fonts   = 1
 ":1 Plugin - Syntastic
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'pylint']
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height=3
-
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
 "CloseTag
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako,jsx,js let b:closetag_html_style=1
 autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,jinja,eruby,mako,jsx,js source ~/.vim/bundle/closetag/plugin/closetag.vim
