@@ -44,6 +44,7 @@ filetype on 			" Enable file type detection
 syntax on 				" Enable syntax highlight
 set smartindent
 set cursorline          " highlight current line
+set backspace=indent,eol,start
 nmap <c-s> :w<CR>       " ctrl + s to save in normal mode
 imap <c-s> <Esc>:w<CR>a " ctrl + s to save in insert mode
 nmap <c-q> :q<CR>       " ctrl + q to quit
@@ -56,7 +57,7 @@ vmap <Leader>P "+P      " , + p to paste in visual mode
 
 "NERDTree
 " Fast toggle
-map <F2> :NERDTreeToggle<CR>
+map <c-\> :NERDTreeToggle<CR>
 
 " NerdTree
 let g:NERDTreeMapOpenVSplit = 'a'
