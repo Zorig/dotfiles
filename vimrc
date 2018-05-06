@@ -33,6 +33,8 @@ Plugin 'dracula/vim'
 Plugin 'w0rp/ale'
 Plugin 'maralla/completor.vim'
 Plugin 'honza/vim-snippets'
+Plugin 'posva/vim-vue'
+Plugin 'pangloss/vim-javascript'
 call vundle#end()
 filetype plugin indent on    " required
 set nu 					" Line number
@@ -43,6 +45,7 @@ set nocompatible 		" Enable Vim features
 filetype on 			" Enable file type detection
 set smartindent
 set cursorline          " highlight current line
+set clipboard=unnamedplus "use system clipboard
 set backspace=indent,eol,start
 nmap <c-s> :w<CR>       " ctrl + s to save in normal mode
 imap <c-s> <Esc>:w<CR>a " ctrl + s to save in insert mode
@@ -152,13 +155,8 @@ endif
 set encoding=utf8
 
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
-" 1tab = 4spaces
-set shiftwidth=4
-set tabstop=4
-
 " Linebreak on 500 characters
 set lbr
-set tw=500
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
@@ -184,7 +182,11 @@ map <leader>ss : setlocal spell!<cr>
 "Emmet just for html/css
 let g:user_emmet_install_global = 1
 autocmd FileType html,css EmmetInstall
-
+let g:user_emmet_settings = {
+  \ 'javascript.jsx': {
+  \    'extends': 'jsx',
+\ }
+\}
 
 " airline
 """"""""""""""""""""""""""""""
@@ -200,8 +202,13 @@ autocmd FileType html,xhtml,xml,jinjahtml,jinja,eruby,mako,jsx,js source ~/.vim/
 imap ;; <C-y>,
 
 "tab space
-autocmd FileType python,ruby,php,java setlocal sw=4 ts=4 sts=4 expandtab
-autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript,hbs setlocal ts=2 sw=2 expandtab
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set smarttab
+set showtabline=2
+autocmd FileType python,ruby,php,java setlocal ts=4 sw=4 sts=4 expandtab
+autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript,hbs,vue setlocal ts=2 sw=2 sts=2 expandtab
 
 "folding
 set foldmethod=indent
@@ -234,6 +241,7 @@ let g:ale_emit_conflict_warnings = 0
 
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
+\ 'vue': ['eslint'],
 \ 'python': ['flake8', 'pylint'],
 \}
 
@@ -244,3 +252,5 @@ let g:ale_sign_warning = '⚠'
 
 " Trigger configuration
 let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsSnippetDirectories=["~/.vim/bundle/vim-vim-snippets/UltiSnips"]
+let g:vue_disable_pre_processors=1
