@@ -1,42 +1,41 @@
 "Zorig's vimrc file
 
 "Vim conf
-set nocompatible              " be iMproved, required
-filetype on                  " required
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * Plugstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
+" let vim-plug using
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'mattn/emmet-vim'
+Plug 'kien/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'ervandew/supertab'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'scrooloose/nerdcommenter'
+Plug 'mitsuhiko/vim-jinja', { 'for': ['htmljinja', 'htmldjangojinjahtml', 'htmldjango'] }
+Plug 'Raimondi/delimitMate'
+Plug 'alvan/closetag.vim'
+Plug 'Valloric/MatchTagAlways'
+Plug 'SirVer/ultisnips'
+Plug 'tmhedberg/SimpylFold'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-surround'
+Plug 'joukevandermaas/vim-ember-hbs'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'dracula/vim'
+Plug 'w0rp/ale'
+Plug 'maralla/completor.vim'
+Plug 'honza/vim-snippets'
+Plug 'posva/vim-vue', { 'for': ['vue'] }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
+call plug#end()
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'mattn/emmet-vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'ervandew/supertab'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'mitsuhiko/vim-jinja'
-Plugin 'Raimondi/delimitMate'
-Plugin 'alvan/closetag.vim'
-Plugin 'Valloric/MatchTagAlways'
-Plugin 'SirVer/ultisnips'
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'tpope/vim-surround'
-Plugin 'joukevandermaas/vim-ember-hbs'
-Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'dracula/vim'
-Plugin 'w0rp/ale'
-Plugin 'maralla/completor.vim'
-Plugin 'honza/vim-snippets'
-Plugin 'posva/vim-vue'
-Plugin 'pangloss/vim-javascript'
-call vundle#end()
-filetype plugin indent on    " required
 set nu 					" Line number
 let mapleader=","   	" Leader key
 set nocompatible 		" Enable Vim features
@@ -102,8 +101,8 @@ function! NERDTreeCustomIgnoreFilter(path)
     endif
   endfor
 endfunction
-" File type plugins
-filetype plugin on 		" Enable plugins
+" File type Plugs
+filetype plugin on 		" Enable Plugs
 filetype indent on 		" Enable indent
 let $PYTHONDONTWRITEBYTECODE = 1 " Python dont write .pyc, pyo
 let $PYTHONIOENCODING = 'utf-8'  " Python encoding= utf-8
@@ -133,9 +132,11 @@ set showmatch
 syntax enable
 set t_Co=256
 set background=dark
-syntax on
 syntax sync fromstart
-color dracula
+if (has("termguicolors"))
+ set termguicolors
+endif
+colorscheme dracula
 hi Directory guifg=#00FFFF ctermfg=cyan
 ":1 GUI only settings
 if has('gui_running')
@@ -196,7 +197,7 @@ let g:airline_powerline_fonts   = 1
 "
 "CloseTag
 autocmd FileType html,htmldjangojinjahtml,eruby,mako,jsx,js let b:closetag_html_style=1
-autocmd FileType html,xhtml,xml,jinjahtml,jinja,eruby,mako,jsx,js source ~/.vim/bundle/closetag/plugin/closetag.vim
+autocmd FileType html,xhtml,xml,jinjahtml,jinja,eruby,mako,jsx,js source ~/.vim/bundle/closetag/Plug/closetag.vim
 
 "emmet vim remap
 imap ;; <C-y>,
@@ -245,6 +246,11 @@ let g:ale_linters = {
 \ 'python': ['flake8', 'pylint'],
 \}
 
+let g:ale_fixers = {
+\  'javascript': ['eslint', 'prettier'],
+\  'python': ['black', 'pep8']
+\}
+
 " fix files automatically on save.
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '✗'
@@ -252,5 +258,5 @@ let g:ale_sign_warning = '⚠'
 
 " Trigger configuration
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsSnippetDirectories=["~/.vim/bundle/vim-vim-snippets/UltiSnips"]
+let g:UltiSnipsSnippetDirectories=["~/.vim/plugged/vim-snippets/UltiSnips"]
 let g:vue_disable_pre_processors=1
