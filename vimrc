@@ -153,9 +153,7 @@ endif
 
 " UTF-8 as standart
 set encoding=utf8
-
-set guifont=Source\ Code\ Pro\ for\ Powerline\ 11
-"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 " Linebreak on 500 characters
 set lbr
 set ai "Auto indent
