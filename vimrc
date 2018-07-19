@@ -27,7 +27,7 @@ Plug 'tpope/vim-surround'
 Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'dracula/vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'w0rp/ale'
 Plug 'maralla/completor.vim'
 Plug 'honza/vim-snippets'
@@ -134,9 +134,9 @@ set t_Co=256
 set background=dark
 syntax sync fromstart
 if (has("termguicolors"))
- set termguicolors
+  set termguicolors
 endif
-colorscheme dracula
+colorscheme nord
 hi Directory guifg=#00FFFF ctermfg=cyan
 ":1 GUI only settings
 if has('gui_running')
@@ -149,13 +149,13 @@ if has('gui_running')
   set guioptions-=L             " Remove scroll in splitted window
   set guioptions-=m             " Remove menu bar
   set guicursor+=a:blinkon0     " Disable cursor blinking
-  set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 endif
 
 " UTF-8 as standart
 set encoding=utf8
 
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+set guifont=Source\ Code\ Pro\ for\ Powerline\ 11
+"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 " Linebreak on 500 characters
 set lbr
 set ai "Auto indent
@@ -208,7 +208,7 @@ set softtabstop=2
 set expandtab
 set smarttab
 set showtabline=2
-autocmd FileType python,ruby,php,java setlocal ts=4 sw=4 sts=4 expandtab
+autocmd FileType python,ruby,php,java,json setlocal ts=4 sw=4 sts=4 expandtab
 autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript,hbs,vue setlocal ts=2 sw=2 sts=2 expandtab
 
 "folding
@@ -260,3 +260,5 @@ let g:ale_sign_warning = '⚠'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsSnippetDirectories=["~/.vim/plugged/vim-snippets/UltiSnips"]
 let g:vue_disable_pre_processors=1
+
+let g:nord_cursor_line_number_background = 1
