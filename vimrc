@@ -208,7 +208,7 @@ set smarttab
 set showtabline=2
 autocmd FileType python,ruby,php,java,json setlocal ts=4 sw=4 sts=4 expandtab
 autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript,hbs,vue setlocal ts=2 sw=2 sts=2 expandtab
-
+set belloff=all
 "folding
 set foldmethod=indent
 set foldlevel=99
