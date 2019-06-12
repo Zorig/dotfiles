@@ -249,6 +249,8 @@ let g:ale_fixers = {
 \  'python': ['black', 'pep8']
 \}
 
+autocmd BufWritePre *.py execute ':Black'
+
 " fix files automatically on save.
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '✗'
