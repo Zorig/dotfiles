@@ -36,23 +36,8 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] }
 Plug 'leafgarland/typescript-vim', {'for': ['typescript', 'ts', 'tsx']}
 Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': [
-    \ 'javascript',
-    \ 'typescript',
-    \ 'css',
-    \ 'less',
-    \ 'scss',
-    \ 'json',
-    \ 'graphql',
-    \ 'markdown',
-    \ 'vue',
-    \ 'lua',
-    \ 'php',
-    \ 'python',
-    \ 'ruby',
-    \ 'html',
-    \ 'swift' ] }
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'jsx'] }
+Plug 'ayu-theme/ayu-vim'
 call plug#end()
 
 set nu 					" Line number
@@ -97,7 +82,6 @@ function! NERDTreeCustomIgnoreFilter(path)
         \ $HOME . '/Desktop',
         \ $HOME . '/Documents',
         \ $HOME . '/Downloads',
-        \ $HOME . '/Dropbox',
         \ $HOME . '/Music',
         \ $HOME . '/Pictures',
         \ $HOME . '/Videos',
@@ -150,16 +134,12 @@ set showmatch
 " Syntax highlight
 syntax enable
 set t_Co=256
-set background=dark
 syntax sync fromstart
-if (has("termguicolors"))
-  set termguicolors
-endif
 colorscheme nord
 hi Directory guifg=#00FFFF ctermfg=cyan
 ":1 GUI only settings
 if has('gui_running')
-  set background=dark
+  set termguicolors             " enable true color support
   let g:airline#extensions#branch#enabled = 1
   let g:airline#extensions#ale#enabled = 1
   let g:airline_powerline_fonts   = 1
@@ -168,11 +148,13 @@ if has('gui_running')
   set guioptions-=L             " Remove scroll in splitted window
   set guioptions-=m             " Remove menu bar
   set guicursor+=a:blinkon0     " Disable cursor blinking
+  set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+  let ayucolor="dark"
+  colorscheme ayu
 endif
 
 " UTF-8 as standart
 set encoding=utf8
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 " Linebreak on 500 characters
 set lbr
 set ai "Auto indent
@@ -281,5 +263,7 @@ let g:UltiSnipsSnippetDirectories=["~/.vim/plugged/vim-snippets/UltiSnips"]
 let g:vue_disable_pre_processors=1
 
 let g:nord_cursor_line_number_background = 1
+
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd BufWritePre *.py execute ':Black'
