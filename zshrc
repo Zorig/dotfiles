@@ -70,3 +70,5 @@ if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
   }
   chpwd
 fi
+
+alias vim='nvim'
