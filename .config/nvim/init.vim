@@ -20,7 +20,6 @@ Plug 'mxw/vim-jsx', { 'for': ['jsx'] }
 Plug 'ianks/vim-tsx', { 'for': ['tsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'js'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'ts', 'tsx'] }
-Plug 'ternjs/tern_for_vim', { 'do': 'yarn && yarn globad add -g tern' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine'
