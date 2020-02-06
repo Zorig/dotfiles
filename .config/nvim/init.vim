@@ -11,15 +11,14 @@ endif
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'dense-analysis/ale'
-Plug 'ayu-theme/ayu-vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'neoclide/coc.nvim', { 'tag': '*', 'do': { -> coc#util#install() } }
 Plug 'mitsuhiko/vim-jinja', { 'for': ['htmljinja', 'htmldjangojinjahtml', 'htmldjango'] }
-Plug 'mxw/vim-jsx', { 'for': ['jsx'] }
-Plug 'ianks/vim-tsx', { 'for': ['tsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'js'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'ts', 'tsx'] }
+Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript', 'tsx'] }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine'
@@ -29,7 +28,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'ervandew/supertab'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 call plug#end()
 
@@ -94,8 +92,7 @@ let g:airline_powerline_fonts   = 1
 
 " Color
 set termguicolors
-let ayucolor = "mirage"
-colorscheme ayu
+colorscheme nord
 
 " Coc
 let g:coc_global_extensions = ['coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-json', 'coc-pyls']
