@@ -1,0 +1,20 @@
+{
+    "diffEditor.renderSideBySide": true,
+    "editor.fontFamily": "JetBrains Mono, Fira Code, Menlo, Monaco, 'Courier New', monospace",
+    "editor.formatOnSave": true,
+    "editor.fontLigatures": true,
+    "editor.folding": true,
+    "editor.foldingStrategy": "auto",
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "workbench.sideBar.location": "right",
+    "workbench.startupEditor": "welcomePage",
+
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "git.autofetch": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "prettier.disableLanguages": ["vue", "html"],
+    "search.searchOnType": false,
+    "workbench.colorTheme": "Nord"
+}
