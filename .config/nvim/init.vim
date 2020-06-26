@@ -11,7 +11,7 @@ endif
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'dense-analysis/ale'
-Plug 'arcticicestudio/nord-vim'
+Plug 'ghifarit53/tokyonight.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'neoclide/coc.nvim', { 'tag': '*', 'do': { -> coc#util#install() } }
@@ -76,8 +76,8 @@ let g:ale_linters = {
 \ 'python': ['flake8',],
 \}
 let g:ale_fixes = {
-\ 'javascript': ['prettier', 'eslint'],
-\ 'typescript': ['prettier', 'eslint'],
+\ 'javascript': ['eslint', 'prettier'],
+\ 'typescript': ['eslint', 'prettier'],
 \ 'python': ['black'],
 \}
 let g:ale_fix_on_save = 1
@@ -88,11 +88,15 @@ let g:airline#extensions#ale#warning_symbol = '⚠:'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts   = 1
+let g:airline_theme = 'seoul256'
 
 
-" Color
-set termguicolors
-colorscheme nord
+" Tokyo night specific
+set termguicolors             " enable true color support
+let g:tokyonight_style = 'storm' " available: night, storm
+let g:tokyonight_enable_italic = 1
+let g:tokyonight_disable_italic_comment = 1
+colorscheme tokyonight
 
 " Coc
 let g:coc_global_extensions = ['coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-json', 'coc-pyls']
@@ -111,11 +115,11 @@ let g:user_emmet_settings = {
 " Filetype
 autocmd FileType python,ruby,php,java,json setlocal ts=4 sw=4 sts=4 expandtab
 autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript,typescript,hbs setlocal ts=2 sw=2 sts=2 expandtab
-au BufNewFile,BufRead *.ts setlocal filetype=typescript
-au BufNewFile,BufRead *.tsx setlocal filetype=typescript
+au BufNewFile,BufRead *.ts set filetype=typescript.tsx
+au BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 
 " Fold
-autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript.jsx setlocal foldmethod=indent
+autocmd FileType html,jinja,css,htmljinja,htmldjango,javascript.jsx,typescript,tsx setlocal foldmethod=indent
 nmap <space> za
 set fillchars=vert:\|,fold:\
 set foldlevelstart=0
@@ -147,6 +151,10 @@ let g:prettier#config#arrow_parens = 'avoid'
 let g:prettier#config#parser = 'babylon'
 let g:prettier#config#trailing_comma = "none"
 "}}
+
+" typescript
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = '--p tsconfig.json'
 
 "true Wildmenu
 if has('wildmenu')
