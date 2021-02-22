@@ -11,10 +11,10 @@ endif
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'dense-analysis/ale'
-Plug 'ghifarit53/tokyonight.vim'
+Plug 'ghifarit53/tokyonight-vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'neoclide/coc.nvim', { 'tag': '*', 'do': { -> coc#util#install() } }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'mitsuhiko/vim-jinja', { 'for': ['htmljinja', 'htmldjangojinjahtml', 'htmldjango'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'js'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'ts', 'tsx'] }
@@ -40,6 +40,7 @@ noremap <C-L> <C-W>l
 set cursorline
 set autoindent
 set signcolumn=yes
+set nocompatible
 set ruler
 set number
 set showmatch
@@ -64,7 +65,6 @@ noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
-imap <Tab> <C-n>
 
 " Ale
 let g:ale_sign_error = '✖'
@@ -90,7 +90,6 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts   = 1
 let g:airline_theme = 'seoul256'
 
-
 " Tokyo night specific
 set termguicolors             " enable true color support
 let g:tokyonight_style = 'storm' " available: night, storm
@@ -99,8 +98,30 @@ let g:tokyonight_disable_italic_comment = 1
 colorscheme tokyonight
 
 " Coc
-let g:coc_global_extensions = ['coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-json', 'coc-pyls']
+let g:coc_global_extensions = ['coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-json', 'coc-pyls', 'coc-java', 'coc-jedi', 'coc-graphql']
 autocmd CursorHold * silent call CocActionAsync('highlight')
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+inoremap <silent><expr> <TAB>
+	\ pumvisible() ? "\<C-n>" :
+	\ <SID>check_back_space() ? "\<TAB>" :
+	\ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col-1] =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 "Emmet just for html/css
 imap ;; <C-y>,
@@ -166,4 +187,5 @@ if has('wildmenu')
 	set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
 	set wildignore+=**/node_modules/**,**/bower_modules/**,*/.sass-cache/*
 	set wildignore+=__pycache__,*.egg-info,.pytest_cache
+	set wildignore+=env,venv
 endif
