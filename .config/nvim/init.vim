@@ -10,29 +10,44 @@ endif
 
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'dense-analysis/ale'
 Plug 'ghifarit53/tokyonight-vim'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+" airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+" Nvim tree
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons', {'on': 'NvimTreeToggle'}
+" 
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+Plug 'Yggdroot/indentLine'
+" GIT
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+Plug 'rhysd/git-messenger.vim'
+" Edit
+Plug 'terryma/vim-multiple-cursors'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'scrooloose/nerdcommenter'
+" Syntax
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'jsx', 'tsx'] }
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'neoclide/vim-jsx-improve', { 'for': ['typescript', 'ts', 'js', 'tsx', 'jsx'] }
 Plug 'mitsuhiko/vim-jinja', { 'for': ['htmljinja', 'htmldjangojinjahtml', 'htmldjango'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'js'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'ts', 'tsx'] }
 Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript', 'tsx'] }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'Yggdroot/indentLine'
-Plug 'davidhalter/jedi-vim', { 'for': ['python', 'py'] }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'jsx'] }
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+" Wakatime
+Plug 'wakatime/vim-wakatime'
 call plug#end()
 
 " General
-let mapleader = ","
+let mapleader = "\<Space>"
 noremap <C-J> <C-W>j
 noremap <C-K> <C-W>k
 noremap <C-H> <C-W>h
@@ -42,6 +57,7 @@ set autoindent
 set signcolumn=yes
 set nocompatible
 set ruler
+set hidden
 set number
 set showmatch
 set hlsearch
@@ -52,8 +68,16 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set smarttab
+set mouse=a
+set splitbelow
+set splitright
+set conceallevel=0
+set nobackup
+set nowritebackup
+set encoding=UTF-8
 set ai
 set si
+syntax enable
 filetype plugin on
 nmap w <C-w>
 map <leader>tn :tabnew<cr>
@@ -65,29 +89,14 @@ noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
-
-" Ale
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-let g:ale_python_flake8_executable = '/usr/bin/flake8'
-let g:ale_linters = {
-\ 'javascript': ['eslint'],
-\ 'typescript': ['eslint',],
-\ 'python': ['flake8',],
-\}
-let g:ale_fixes = {
-\ 'javascript': ['eslint', 'prettier'],
-\ 'typescript': ['eslint', 'prettier'],
-\ 'python': ['black'],
-\}
-let g:ale_fix_on_save = 1
+noremap <C-t> :bottom terminal<CR>
 
 " Airline
-let g:airline#extensions#ale#error_symbol = '✖:'
-let g:airline#extensions#ale#warning_symbol = '⚠:'
 let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#ale#enabled = 1
-let g:airline_powerline_fonts   = 1
+let g:airline#extensions#coc#enabled = 1
+let airline#extensions#coc#error_symbol = '✖:'
+let airline#extensions#coc#warning_symbol = 'W:'
+
 let g:airline_theme = 'seoul256'
 
 " Tokyo night specific
@@ -98,7 +107,7 @@ let g:tokyonight_disable_italic_comment = 1
 colorscheme tokyonight
 
 " Coc
-let g:coc_global_extensions = ['coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-json', 'coc-pyls', 'coc-java', 'coc-jedi', 'coc-graphql']
+let g:coc_global_extensions = ['coc-eslint', 'coc-prettier', 'coc-python', 'coc-tsserver', 'coc-css', 'coc-json', 'coc-pyls', 'coc-java', 'coc-jedi', 'coc-graphql']
 autocmd CursorHold * silent call CocActionAsync('highlight')
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 inoremap <silent><expr> <TAB>
@@ -107,6 +116,7 @@ inoremap <silent><expr> <TAB>
 	\ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> gr <Plug>(coc-references)
 
 function! s:check_back_space() abort
 	let col = col('.') - 1
@@ -122,6 +132,8 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
+
+let g:python3_host_prog = expand("/usr/bin/python3")
 
 "Emmet just for html/css
 imap ;; <C-y>,
@@ -189,3 +201,23 @@ if has('wildmenu')
 	set wildignore+=__pycache__,*.egg-info,.pytest_cache
 	set wildignore+=env,venv
 endif
+
+"telescope
+nnoremap <c-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>	
+
+lua << EOF
+require('telescope').setup{
+	defaults = {
+		layout_strategy= 'vertical'
+	}
+}
+EOF
+"NvimTree
+nnoremap <C-\> :NvimTreeToggle<CR>
+nnoremap r :NvimTreeRefresh<CR>
+nnoremap n :NvimTreeRefresh<CR>
+let g:nvim_tree_side = 'right'
+let g:nvim_tree_ignore = ['.git', 'node_modules', '.cache']
