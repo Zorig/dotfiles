@@ -1,0 +1,28 @@
+{
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescriptreact": "typescriptreact"
+  },
+  "coc.preferences.formatOnSaveFiletypes": [
+    "html",
+    "css",
+    "js",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact",
+    "json",
+    "javascript",
+    "python"
+  ],
+  "jedi.executable.command": "/usr/local/bin/jedi-language-server",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "python.formatting.provider": "black"
+}

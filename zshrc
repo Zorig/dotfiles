@@ -1,3 +1,4 @@
+fpath+=~/.zfunc
 autoload -Uz compinit
 typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
 if [ $(date +'%j') != $updated_at ]; then
@@ -28,6 +29,7 @@ zstyle ':completion:::::' completer _expand _complete _ignored _approximate # en
 # Load antibody plugin manager
 source <(antibody init)
 # Plugins
+antibody bundle spaceship-prompt/spaceship-prompt
 antibody bundle zdharma/fast-syntax-highlighting
 antibody bundle zsh-users/zsh-autosuggestions
 antibody bundle zsh-users/zsh-history-substring-search
@@ -72,3 +74,11 @@ if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
 fi
 
 alias vim='nvim'
+alias python=/usr/bin/python3
+
+export PATH="$HOME/.poetry/bin:$PATH"
+export HOMEBREW_NO_AUTO_UPDATE=1
+export NVM_DIR="$HOME/.nvm"
+	[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completionc
+export PATH=$HOME/bin:$PATH
