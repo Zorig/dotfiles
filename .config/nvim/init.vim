@@ -10,6 +10,16 @@ endif
 
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
+
 Plug 'ghifarit53/tokyonight-vim'
 " Telescope
 Plug 'nvim-lua/popup.nvim'
@@ -31,7 +41,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'css', 'javascriptreact', 'typescriptreact'] }
 " Syntax
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'neoclide/vim-jsx-improve', { 'for': ['typescript', 'ts', 'js', 'tsx', 'jsx', 'javascript', 'javascriptreact', 'typescriptreact'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'js', 'javascriptreact'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'ts', 'tsx', 'typescriptreact'] }
@@ -39,8 +48,112 @@ Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript', 'tsx', 'typescriptre
 Plug 'jparise/vim-graphql', { 'for': ['typescriptreact', 'javascriptreact'] }
 " Wakatime
 Plug 'wakatime/vim-wakatime'
-Plug 'liuchengxu/eleline.vim'
+" Status
+Plug 'nvim-lualine/lualine.nvim'
 call plug#end()
+
+lua << EOF
+local lspconfig = require('lspconfig')
+local servers = {'tsserver', 'pyright'}
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+local on_attach = function(client, bufnr)
+	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+	local opts = { noremap=true, silent=true }
+
+	buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+	buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+	buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+	buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+	buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+	buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+	buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+	buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+	buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+	buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+	buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+	buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+	buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+	buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+	buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+end
+
+for _, lsp in ipairs(servers) do
+	lspconfig[lsp].setup {
+		on_attach = on_attach,
+		capabilities = capabilities
+	}
+end
+
+-- luasnip
+local luasnip = require 'luasnip'
+
+-- nvim-cmp
+local cmp = require 'cmp'
+cmp.setup({
+	snippet = {
+		-- REQUIRED - you must specify a snippet engine
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+		end,
+	},
+	mapping = {
+		['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+		['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+		['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+		['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+		['<C-e>'] = cmp.mapping({
+			i = cmp.mapping.abort(),
+			c = cmp.mapping.close(),
+		}),
+		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+
+		['<Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end,
+	},
+	sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' }, -- For luasnip users.
+	}, {
+		{ name = 'buffer' },
+	})
+})
+cmp.setup.cmdline('/', {
+	sources = {
+		{ name = 'buffer' }
+	}
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+	sources = cmp.config.sources({
+		{ name = 'path' }
+	}, {
+		{ name = 'cmdline' }
+	})
+})
+
+EOF
 
 " General
 let mapleader = "\<Space>"
@@ -86,14 +199,6 @@ noremap <Leader>Y "+y
 noremap <Leader>P "+p
 noremap <C-t> :bottom terminal<CR>
 
-" Airline
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#coc#enabled = 1
-let airline#extensions#coc#error_symbol = '✖:'
-let airline#extensions#coc#warning_symbol = 'W:'
-let g:airline_theme = 'seoul256'
-
 " Tokyo night specific
 set termguicolors             " enable true color support
 let g:tokyonight_style = 'storm' " available: night, storm
@@ -105,40 +210,6 @@ colorscheme tokyonight
 let g:user_emmet_install_global = 0
 autocmd Filetype html,css,javascriptreact,typescriptreact EmmetInstall
 let g:user_emmet_leader_key = '<C-z'
-
-" Coc
-let g:coc_global_extensions = ['coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-json', 'coc-emmet', 'coc-pyright']
-autocmd CursorHold * silent call CocActionAsync('highlight')
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? "\<C-n>" :
-\ <SID>check_back_space() ? "\<TAB>" :
-\ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <leader> rn <Plug>(coc-rename)
-nmap <leader> do <Plug>(coc-codeaction)
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col-1] =~# '\s'
-endfunction
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
 
 let g:python3_host_prog = expand("/usr/bin/python3")
 
@@ -158,12 +229,6 @@ let g:indentLine_first_char = '▏'
 let g:indentLine_char_list = ['▏', '│', '┆', '┊']
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_setColors = 0
-"}}
-
-"Prettier {{
-"let g:prettier#autoformat = 1
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.yaml,*.html PrettierAsync
 "}}
 
 " typescript
@@ -201,7 +266,6 @@ EOF
 nnoremap <C-\> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 let g:nvim_tree_side = 'right'
-let g:nvim_tree_gitignore = 1
 let g:nvim_tree_disable_window_picker = 1
 let g:nvim_tree_git_hl = 1
 let g:nvim_tree_highlight_opened_files = 1
@@ -228,5 +292,8 @@ require'nvim-tree'.setup {
 		}
 	}
 EOF
-"Eleline
-let g:eleline_powerline_fonts = 1
+
+"Lualine
+lua << END
+require('lualine').setup()
+END
