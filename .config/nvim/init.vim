@@ -12,6 +12,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 " LSP
 Plug 'neovim/nvim-lspconfig'
+" Completion
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -19,7 +20,10 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
-
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'jose-elias-alvarez/null-ls.nvim'
+" Color
 Plug 'ghifarit53/tokyonight-vim'
 " Telescope
 Plug 'nvim-lua/popup.nvim'
@@ -40,12 +44,6 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'css', 'javascriptreact', 'typescriptreact'] }
-" Syntax
-Plug 'neoclide/vim-jsx-improve', { 'for': ['typescript', 'ts', 'js', 'tsx', 'jsx', 'javascript', 'javascriptreact', 'typescriptreact'] }
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'js', 'javascriptreact'] }
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'ts', 'tsx', 'typescriptreact'] }
-Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript', 'tsx', 'typescriptreact', 'typescript.tsx'] }
-Plug 'jparise/vim-graphql', { 'for': ['typescriptreact', 'javascriptreact'] }
 " Wakatime
 Plug 'wakatime/vim-wakatime'
 " Status
@@ -54,10 +52,21 @@ call plug#end()
 
 lua << EOF
 local lspconfig = require('lspconfig')
-local servers = {'tsserver', 'pyright'}
+local servers = {'tsserver', 'pylsp'}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+local null_ls = require('null-ls')
+local sources = {
+	null_ls.builtins.formatting.black,
+	null_ls.builtins.formatting.eslint,
+	null_ls.builtins.diagnostics.flake8,
+	null_ls.builtins.formatting.isort,
+	null_ls.builtins.formatting.prettier,
+}
+
+null_ls.setup({sources = sources})
 
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -80,6 +89,16 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 	buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+	client.resolved_capabilities.document_formatting = false
+	client.resolved_capabilities.document_range_formatting = false
+
+	if client.resolved_capabilities.document_formatting then
+		vim.api.nvim_command [[augroup Format]]
+		vim.api.nvim_command [[autocmd! * <buffer>]]
+		vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
+		vim.api.nvim_command [[augroup END]]
+	end
+
 end
 
 for _, lsp in ipairs(servers) do
@@ -152,7 +171,6 @@ cmp.setup.cmdline(':', {
 		{ name = 'cmdline' }
 	})
 })
-
 EOF
 
 " General
@@ -167,6 +185,7 @@ set nocompatible
 set hidden
 set number
 set showmatch
+set noshowmode
 set hlsearch
 set incsearch
 set ignorecase
@@ -178,6 +197,7 @@ set smarttab
 set mouse=a
 set splitbelow
 set splitright
+set signcolumn=number
 set conceallevel=0
 set nobackup
 set nocursorline
