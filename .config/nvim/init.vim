@@ -43,19 +43,22 @@ Plug 'rhysd/git-messenger.vim'
 " Edit
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'css', 'javascriptreact', 'typescriptreact'] }
+Plug 'rafamadriz/friendly-snippets'
+
 " Wakatime
 Plug 'wakatime/vim-wakatime'
 " Status
 Plug 'nvim-lualine/lualine.nvim'
+
+Plug 'jparise/vim-graphql'
 call plug#end()
 
 lua << EOF
 local lspconfig = require('lspconfig')
-local servers = {'tsserver', 'pylsp'}
-
+local servers = {'tsserver', 'pylsp', 'graphql', 'cssls', 'html', 'jsonls'}
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local null_ls = require('null-ls')
 local sources = {
@@ -71,7 +74,7 @@ null_ls.setup({sources = sources})
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 	local opts = { noremap=true, silent=true }
-
+	
 	buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 	buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
 	buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -95,7 +98,7 @@ local on_attach = function(client, bufnr)
 	if client.resolved_capabilities.document_formatting then
 		vim.api.nvim_command [[augroup Format]]
 		vim.api.nvim_command [[autocmd! * <buffer>]]
-		vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
+		vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
 		vim.api.nvim_command [[augroup END]]
 	end
 
@@ -104,13 +107,35 @@ end
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup {
 		on_attach = on_attach,
-		capabilities = capabilities
+		capabilities = capabilities,
 	}
 end
 
+--lspconfig.pylsp.setup({
+--	settings = {
+--		pylsp = {
+--			configurationSources = { "flake8" },
+--			plugins = {
+--				yapf = {enabled = false},
+--        pylint = {enabled = false},
+--        pycodestyle = {enabled = false},
+--        pyflakes = {enabled = false},
+--        pydocstyle = {enabled = false},
+--        flake8 = {enabled = true},
+--				pylsp_black = {enabled = true},
+--				pyls_isort = {enabled = true}
+--			}
+--		}
+--	}
+--})
+
 -- luasnip
 local luasnip = require 'luasnip'
-
+require('luasnip.loaders.from_vscode').load()
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 -- nvim-cmp
 local cmp = require 'cmp'
 cmp.setup({
@@ -136,6 +161,8 @@ cmp.setup({
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
+			elseif has_words_before() then
+				cmp.complete()
       else
         fallback()
       end
@@ -226,11 +253,6 @@ let g:tokyonight_enable_italic = 1
 let g:tokyonight_disable_italic_comment = 1
 colorscheme tokyonight
 
-" Emmet
-let g:user_emmet_install_global = 0
-autocmd Filetype html,css,javascriptreact,typescriptreact EmmetInstall
-let g:user_emmet_leader_key = '<C-z'
-
 let g:python3_host_prog = expand("/usr/bin/python3")
 
 " Filetype
@@ -250,10 +272,6 @@ let g:indentLine_char_list = ['▏', '│', '┆', '┊']
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_setColors = 0
 "}}
-
-" typescript
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = '--p tsconfig.json'
 
 "true Wildmenu
 if has('wildmenu')
