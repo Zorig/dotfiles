@@ -1,7 +1,10 @@
 local lspconfig = require('lspconfig')
-local servers = {'tsserver', 'pylsp', 'cssls', 'html', 'jsonls'}
+local servers = {'tsserver', 'pylsp', 'cssls', 'html', 'jsonls', 'graphql'}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 	local opts = { noremap=true, silent=true }
@@ -23,6 +26,14 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 	buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+	if client.resolved_capabilities.document_formatting then
+		vim.cmd([[
+		augroup LspFormatting
+				autocmd! * <buffer>
+				autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+		augroup END
+		]])
+	end
 end
 
 for _, lsp in ipairs(servers) do

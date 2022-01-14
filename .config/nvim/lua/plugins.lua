@@ -32,6 +32,17 @@ return require('packer').startup(function(use)
 
 	-- LSP
 	use 'neovim/nvim-lspconfig'	
+	use 'neovim/nvim-lspconfig'
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'hrsh7th/cmp-buffer'
+	use 'hrsh7th/cmp-path'
+	use 'hrsh7th/cmp-cmdline'
+	use 'hrsh7th/nvim-cmp'
+	use 'saadparwaiz1/cmp_luasnip'
+	use ({'L3MON4D3/LuaSnip',
+				requires = { "rafamadriz/friendly-snippets" },
+				after = 'nvim-cmp',
+			})
 
 	-- Treesitter
 	use({
@@ -39,23 +50,6 @@ return require('packer').startup(function(use)
 		run = ":TSUpdate",
 	})
 
-	---- Completion
-	--use 'hrsh7th/cmp-nvim-lsp'
-	--use 'hrsh7th/cmp-buffer'
-	--use 'hrsh7th/cmp-path'
-	--use 'hrsh7th/cmp-cmdline'
-	--use 'saadparwaiz1/cmp_luasnip'
-	--use 'L3MON4D3/LuaSnip'
-
-	--use({'hrsh7th/nvim-cmp', after = {
-			--"LuaSnip",
-			--"cmp_luasnip",
-			--"cmp-nvim-lsp",
-			--"cmp-buffer",
-			--"cmp-path",
-			--"cmp-cmdline"
-		--};
-	--})
 	-- Color	
 	use 'folke/tokyonight.nvim'
 

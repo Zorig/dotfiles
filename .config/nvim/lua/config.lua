@@ -79,8 +79,14 @@ map('n', '<C-h>', '<C-w>h', default_opts)
 map('n', '<C-j>', '<C-w>j', default_opts)
 map('n', '<C-k>', '<C-w>k', default_opts)
 map('n', '<C-l>', '<C-w>l', default_opts)
-
+--- Yank/Paste
 map('n', '<leader>y', '"*y', {noremap=true})
 map('n', '<leader>p', '"*p', {noremap=true})
 map('n', '<leader>Y', '"+y', {noremap=true})
 map('n', '<leader>P', '"+p', {noremap=true})
+--- Fast save
+map('n', '<leader>s', ':w<cr>', default_opts)
+map('i', '<leader>s', '<C-c>:w<cr>', default_opts)
+--- Move current line / block with Alt-j/k ala vscode.
+map("x", "<A-j>", ":m '>+1<cr>gv-gv", default_opts)
+map("x", "<A-k>", ":m '<-2<cr>gv-gv", default_opts)
