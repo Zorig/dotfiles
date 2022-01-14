@@ -13,6 +13,7 @@ local default_opts = { noremap = true, silent = true }
 g.mapleader = " "                    	-- change leader
 opt.completeopt = "menuone,noselect" 	-- set completeopt to better completion
 opt.cursorline = true                	-- cursor line
+opt.cursorcolumn = true								-- cursor col
 opt.hlsearch = true                  	-- highlight on search
 opt.ignorecase = true                	-- ignore case on search
 opt.mouse = 'a'                      	-- activate mouse
@@ -35,6 +36,14 @@ opt.tabstop = 2												-- tab size == 4 spaces
 opt.shiftwidth = 2										-- shift 4 spaces on tab
 opt.signcolumn='yes'									-- sign on column
 opt.showmode = false									-- no mode on status
+g.python3_host_prog = "/usr/bin/python3"
+-----------------------------------------------------------
+-- Color
+--
+g.tokyonight_italic_functions = true
+g.tokyonight_italic_variables = true
+cmd[[colorscheme tokyonight]]
+
 -----------------------------------------------------------
 -- Startup
 --

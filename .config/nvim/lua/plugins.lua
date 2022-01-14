@@ -26,6 +26,38 @@ return require('packer').startup(function(use)
 	use 'scrooloose/nerdcommenter'
 	use 'terryma/vim-multiple-cursors'
 	use 'wakatime/vim-wakatime'
+	use 'Yggdroot/indentLine'
+	use 'tpope/vim-surround'
+	use 'jiangmiao/auto-pairs'
+
+	-- LSP
+	use 'neovim/nvim-lspconfig'	
+
+	-- Treesitter
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+	})
+
+	---- Completion
+	--use 'hrsh7th/cmp-nvim-lsp'
+	--use 'hrsh7th/cmp-buffer'
+	--use 'hrsh7th/cmp-path'
+	--use 'hrsh7th/cmp-cmdline'
+	--use 'saadparwaiz1/cmp_luasnip'
+	--use 'L3MON4D3/LuaSnip'
+
+	--use({'hrsh7th/nvim-cmp', after = {
+			--"LuaSnip",
+			--"cmp_luasnip",
+			--"cmp-nvim-lsp",
+			--"cmp-buffer",
+			--"cmp-path",
+			--"cmp-cmdline"
+		--};
+	--})
+	-- Color	
+	use 'folke/tokyonight.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

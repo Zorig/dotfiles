@@ -30,4 +30,15 @@ map('n', '<leader>fg', ':Telescope live_grep<cr>', default_opts)
 map('n', '<leader>fb', ':Telescope buffers<cr>', default_opts)
 
 -- Lualine
-require('lualine').setup()
+require('lualine').setup({
+	options = {
+		theme = 'tokyonight'
+	}
+})
+
+
+-- Indentline
+g.indentLine_first_char = '▏'
+g.indentLine_char_list = { '▏', '│', '┆', '┊' }
+g.indentLine_showFirstIndentLevel = 1
+g.indentLine_setColors = 0
