@@ -18,7 +18,7 @@ require('nvim-tree').setup({
 
 map('n', '<C-\\>', ':NvimTreeToggle<CR>', default_opts)
 map('n', '<leader>r', ':NvimTreeRefresh<CR>', default_opts)
-
+map('n', '<leader>\\', ':NvimTreeFocus<CR>', default_opts)
 -- Telescope
 require('telescope').setup({
 	defaults = {

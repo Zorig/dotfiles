@@ -26,6 +26,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 	buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+	-- Format on save
 	if client.resolved_capabilities.document_formatting then
 		vim.cmd([[
 		augroup LspFormatting
@@ -34,6 +35,8 @@ local on_attach = function(client, bufnr)
 		augroup END
 		]])
 	end
+ 	client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
 end
 
 for _, lsp in ipairs(servers) do
