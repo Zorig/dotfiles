@@ -1,4 +1,4 @@
-require('null-ls').setup({
+require("null-ls").setup({
 	sources = {
 		-- Formating
 		require('null-ls').builtins.formatting.isort,

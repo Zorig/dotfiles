@@ -10,62 +10,81 @@ local default_opts = { noremap = true, silent = true }
 -----------------------------------------------------------
 -- General
 --
-g.mapleader = " "                    	-- change leader
-opt.completeopt = "menuone,noselect" 	-- set completeopt to better completion
-opt.cursorline = true                	-- cursor line
-opt.cursorcolumn = true								-- cursor col
-opt.hlsearch = true                  	-- highlight on search
-opt.ignorecase = true                	-- ignore case on search
-opt.mouse = 'a'                      	-- activate mouse
-opt.smartcase = true                 	-- ignore lowercase
-opt.swapfile = false                 	-- no swapfile
-opt.splitright = true                	-- vertical split to the right
-opt.splitbelow = true                	-- horizontal split to the bottom
-opt.incsearch = true                 	-- highlight match while typing
-opt.showmatch = true                 	-- highlight matching parenthesis
-opt.number = true 		     						-- show line number
-opt.smartindent = true               	-- auto indent
-opt.undofile = true                   -- undo 
-opt.undolevels = 100                  -- undo history
-opt.history = 100                    	-- remember n lines
-opt.lazyredraw = true                 -- faster scroll
-opt.synmaxcol = 240										-- max cols for syntax highlight
-opt.hidden = true                    	-- wont save while switching buffer
-opt.clipboard = 'unnamedplus'         -- system clipboard
-opt.tabstop = 2												-- tab size == 4 spaces
-opt.shiftwidth = 2										-- shift 4 spaces on tab
-opt.signcolumn='yes'									-- sign on column
-opt.showmode = false									-- no mode on status
+g.mapleader = " " -- change leader
+g.maplocalleader = " " -- change leader
+opt.completeopt = "menuone,noselect" -- set completeopt to better completion
+opt.hlsearch = true -- highlight on search
+opt.ignorecase = true -- ignore case on search
+opt.mouse = "a" -- activate mouse
+opt.smartcase = true -- ignore lowercase
+opt.swapfile = false -- no swapfile
+opt.splitright = true -- vertical split to the right
+opt.splitbelow = true -- horizontal split to the bottom
+opt.incsearch = true -- highlight match while typing
+opt.showmatch = true -- highlight matching parenthesis
+opt.number = true -- show line number
+opt.smartindent = true -- auto indent
+opt.undofile = true -- undo
+opt.undolevels = 100 -- undo history
+opt.history = 100 -- remember n lines
+opt.lazyredraw = true -- faster scroll
+opt.synmaxcol = 240 -- max cols for syntax highlight
+opt.hidden = true -- wont save while switching buffer
+opt.clipboard = "unnamedplus" -- system clipboard
+opt.tabstop = 2 -- tab size == 4 spaces
+opt.shiftwidth = 2 -- shift 4 spaces on tab
+opt.softtabstop = 2
+
+vim.wo.signcolumn = "yes:1" -- sign on column
+opt.showmode = false -- no mode on status
+opt.encoding = "utf8"
 g.python3_host_prog = "/usr/bin/python3"
+opt.fillchars = {
+  vert = "│",
+  fold = " ",
+  eob = " ", -- suppress ~ at EndOfBuffer
+  --diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+  msgsep = "‾",
+  foldopen = "▾",
+  foldsep = "│",
+  foldclose = "▸",
+}
+
+function MyFoldText()
+    local line = vim.fn.getline(vim.v.foldstart)
+    local nblines = vim.v.foldend - vim.v.foldstart + 1
+    return "  " .. line .. ": " .. nblines .. " lines"
+end
+opt.foldtext = 'v:lua.MyFoldText()'
 -----------------------------------------------------------
 -- Color
 --
 g.tokyonight_italic_functions = true
 g.tokyonight_italic_variables = true
-cmd[[colorscheme tokyonight]]
+cmd([[colorscheme tokyonight]])
 
 -----------------------------------------------------------
 -- Startup
 --
 local disabled_built_ins = {
-    "netrw",
-    "netrwPlugin",
-    "netrwSettings",
-    "netrwFileHandlers",
-    "gzip",
-    "zip",
-    "zipPlugin",
-    "tar",
-    "tarPlugin",
-    "getscript",
-    "getscriptPlugin",
-    "vimball",
-    "vimballPlugin",
-    "2html_plugin",
-    "logipat",
-    "rrhelper",
-    "spellfile_plugin",
-    "matchit"
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"gzip",
+	"zip",
+	"zipPlugin",
+	"tar",
+	"tarPlugin",
+	"getscript",
+	"getscriptPlugin",
+	"vimball",
+	"vimballPlugin",
+	"2html_plugin",
+	"logipat",
+	"rrhelper",
+	"spellfile_plugin",
+	"matchit",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
@@ -75,18 +94,18 @@ end
 -----------------------------------------------------------
 -- KeyMap
 --- move around splits using Ctrl + {h,j,k,l}
-map('n', '<C-h>', '<C-w>h', default_opts)
-map('n', '<C-j>', '<C-w>j', default_opts)
-map('n', '<C-k>', '<C-w>k', default_opts)
-map('n', '<C-l>', '<C-w>l', default_opts)
+map("n", "<C-h>", "<C-w>h", default_opts)
+map("n", "<C-j>", "<C-w>j", default_opts)
+map("n", "<C-k>", "<C-w>k", default_opts)
+map("n", "<C-l>", "<C-w>l", default_opts)
 --- Yank/Paste
-map('n', '<leader>y', '"*y', {noremap=true})
-map('n', '<leader>p', '"*p', {noremap=true})
-map('n', '<leader>Y', '"+y', {noremap=true})
-map('n', '<leader>P', '"+p', {noremap=true})
+map("n", "<leader>y", '"*y', { noremap = true })
+map("n", "<leader>p", '"*p', { noremap = true })
+map("n", "<leader>Y", '"+y', { noremap = true })
+map("n", "<leader>P", '"+p', { noremap = true })
 --- Fast save
-map('n', '<leader>s', ':w<cr>', default_opts)
-map('i', '<leader>s', '<C-c>:w<cr>', default_opts)
+map("n", "<leader>s", ":w<cr>", default_opts)
+map("i", "<leader>s", "<C-c>:w<cr>", default_opts)
 --- Move current line / block with Alt-j/k ala vscode.
-map("x", "<A-j>", ":m '>+1<cr>gv-gv", default_opts)
-map("x", "<A-k>", ":m '<-2<cr>gv-gv", default_opts)
+map("v", "<C-S-k>", ":m '<-2<CR>gv=gv", {noremap = true})
+map("v", "<C-S-j>", ":m '>+1<CR>gv=gv", {noremap = true})
