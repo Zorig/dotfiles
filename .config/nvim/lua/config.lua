@@ -94,7 +94,7 @@ end
 -----------------------------------------------------------
 -- KeyMap
 --- move around splits using Ctrl + {h,j,k,l}
-map("n", "<C-h>", "<C-w>h", default_opts)
+map("n", "<C-h>", "<C-w>h", { noremap = true })
 map("n", "<C-j>", "<C-w>j", default_opts)
 map("n", "<C-k>", "<C-w>k", default_opts)
 map("n", "<C-l>", "<C-w>l", default_opts)
@@ -109,3 +109,6 @@ map("i", "<leader>s", "<C-c>:w<cr>", default_opts)
 --- Move current line / block with Alt-j/k ala vscode.
 map("v", "<C-S-k>", ":m '<-2<CR>gv=gv", {noremap = true})
 map("v", "<C-S-j>", ":m '>+1<CR>gv=gv", {noremap = true})
+
+map('n', '<leader>[', ':bp<CR>', default_opts)
+map('n', '<leader>]', ':bn<CR>', default_opts)

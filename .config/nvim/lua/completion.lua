@@ -1,5 +1,5 @@
 local cmp = require("cmp")
-require("luasnip.loaders.from_vscode").lazy_load({include = "javascript", "typescriptreact", "javascriptreact"})
+require("luasnip.loaders.from_vscode").load({include = {"javascriptreact", "typescriptreact"}})
 
 require("luasnip").filetype_extend("python", { "django" })
 
@@ -25,46 +25,26 @@ cmp.setup({
 			c = cmp.mapping.close(),
 		}),
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-
-		["<Tab>"] = function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			elseif has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end,
-		["<S-Tab>"] = function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end,
+		["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then cmp.select_next_item()
+      elseif luasnip.expandable() then  luasnip.expand()
+      elseif luasnip.expand_or_jumpable() then luasnip.expand_or_jump()
+      elseif check_backspace() then fallback()
+      else fallback()
+      end
+    end, { "i", "s"}),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then luasnip.jump(-1)
+      else fallback()
+      end
+    end, { "i", "s"}),
 	},
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" }, -- For luasnip users.
-	}, {
-		{ name = "buffer" },
-	}),
-})
-cmp.setup.cmdline("/", {
-	sources = {
-		{ name = "buffer" },
-	},
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(":", {
-	sources = cmp.config.sources({
 		{ name = "path" },
 	}, {
-		{ name = "cmdline" },
+		{ name = "buffer" },
 	}),
 })

@@ -61,8 +61,8 @@ local on_attach = function(client, bufnr)
 			augroup END
 			]])
 	end
- 	client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
+	--client.resolved_capabilities.document_formatting = false
+  --client.resolved_capabilities.document_range_formatting = false
 end
 
 for _, lsp in ipairs(servers) do
