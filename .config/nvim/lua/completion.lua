@@ -27,9 +27,7 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 		["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then cmp.select_next_item()
-      elseif luasnip.expandable() then  luasnip.expand()
       elseif luasnip.expand_or_jumpable() then luasnip.expand_or_jump()
-      elseif check_backspace() then fallback()
       else fallback()
       end
     end, { "i", "s"}),
@@ -44,6 +42,7 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" }, -- For luasnip users.
 		{ name = "path" },
+		{ name = "buffer" },
 	}, {
 		{ name = "buffer" },
 	}),

@@ -1,33 +1,14 @@
 local lspconfig = require("lspconfig")
 
-local pylsp_config = {
-cmd = { "pylsp" },
-root_dir = function(fname)
-		local root_files = {
-			"pyproject.toml",
-			"setup.py",
-			"setup.cfg",
-			"requirements.txt",
-			"Pipfile",
-		}
-		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-	end,
-	settings = {
-		configurationSources = { "pylint" },
-		plugins = {
-			pylint = { enabled = true },
-			flake8 = { enabled = false },
-			pycodestyle = { enabled = false },
-			pyflakes = { enabled = false },
-		},
-	},
-}
-
-local servers = { "tsserver", "pylsp", "cssls", "html", "jsonls", "graphql" }
+local servers = {"tsserver", "cssls", "html", "jsonls", "graphql"}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+        properties = { "documentation", "detail", "additionalTextEdits" },
+      }
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+
 
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
@@ -61,8 +42,8 @@ local on_attach = function(client, bufnr)
 			augroup END
 			]])
 	end
-	--client.resolved_capabilities.document_formatting = false
-  --client.resolved_capabilities.document_range_formatting = false
+	client.resolved_capabilities.document_formatting = false
+	client.resolved_capabilities.document_range_formatting = false
 end
 
 for _, lsp in ipairs(servers) do
@@ -71,3 +52,18 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+lspconfig.pylsp.setup({
+	on_attach = on_attach,
+	settings = {
+		pylsp = {
+			configurationSources = {"pylint"},
+			plugins = {
+				pylint = { enabled = false },
+				flake8 = { enabled = true },
+				pycodestyle = { enabled = false },
+				pyflakes = { enabled = false },
+			}
+		}
+	}
+})

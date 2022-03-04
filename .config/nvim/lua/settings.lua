@@ -49,7 +49,7 @@ g.indentLine_first_char = "▏"
 g.indentLine_char_list = { "▏", "│", "┆", "┊" }
 g.indentLine_showFirstIndentLevel = 1
 g.indentLine_setColors = 1
-
+g.indentLine_fileTypeExclude = { 'dashboard' }
 
 
 -- ToggleTerm
@@ -71,3 +71,19 @@ require('toggleterm').setup({
 --vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", { noremap = true, silent = true })
 --vim.api.nvim_set_keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", { noremap = true, silent = true })
 --vim.api.nvim_set_keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", { noremap = true, silent = true })
+
+-- dashboard
+g.dashboard_default_executive = 'telescope'
+map('n', '<leader>ss', ':<C-u>SessionSave<CR>', default_opts)
+map('n', '<leader>sl', ':<C-u>SessionLoad<CR>', default_opts)
+map('n', '<leader>ff', ':DashboardFindFile<cr>', default_opts)
+map('n', '<leader>fh', ':DashboardFindHistory<cr>', default_opts)
+map('n', '<leader>fw', ':DashboardFindWord<cr>', default_opts)
+map('n', '<leader>bm', ':DashboardJumpMark<cr>', default_opts)
+--g.dashboard_custom_shortcut = {
+	--a={description={'last session                 SPC s l'}, command = "SessionLoad"},
+	--b={description={'find history                 SPC f h'}, command = "Telescope oldfiles"},
+	--d={description={'find file                    SPC f f'}, command = "Telescope find_files"},
+	--e={description={'find word                    SPC f w'}, command = "Telescope live_grep"},
+	--f={description={'jump mark                    SPC b m'}, command = "Telescope marks"},
+--}

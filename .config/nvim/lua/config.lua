@@ -107,8 +107,8 @@ map("n", "<leader>P", '"+p', { noremap = true })
 map("n", "<leader>s", ":w<cr>", default_opts)
 map("i", "<leader>s", "<C-c>:w<cr>", default_opts)
 --- Move current line / block with Alt-j/k ala vscode.
-map("v", "<C-S-k>", ":m '<-2<CR>gv=gv", {noremap = true})
-map("v", "<C-S-j>", ":m '>+1<CR>gv=gv", {noremap = true})
+map("x", "<C-S-k>", ":m '<-2<CR>gv=gv", {noremap = true})
+map("x", "<C-S-j>", ":m '>+1<CR>gv=gv", {noremap = true})
 
 map('n', '<leader>[', ':bp<CR>', default_opts)
 map('n', '<leader>]', ':bn<CR>', default_opts)

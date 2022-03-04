@@ -58,8 +58,8 @@ return require("packer").startup(function(use)
 	-- Format
 	use({ "jose-elias-alvarez/null-ls.nvim" })
 
-	use({"akinsho/toggleterm.nvim",
-	})
+	use("akinsho/toggleterm.nvim")
+	use("glepnir/dashboard-nvim")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

@@ -1,13 +1,16 @@
-require("null-ls").setup({
+local null_ls = require("null-ls")
+null_ls.setup({
 	sources = {
 		-- Formating
-		require('null-ls').builtins.formatting.isort,
-		require('null-ls').builtins.formatting.black,
-		require('null-ls').builtins.formatting.prettier,
-		require('null-ls').builtins.formatting.stylua,
+		null_ls.builtins.formatting.isort,
+		null_ls.builtins.formatting.black,
+		null_ls.builtins.formatting.prettier.with({
+			prefer_local = "/usr/local/bin/prettier",
+		}),
+		null_ls.builtins.formatting.stylua,
 		-- Diagnostics
-		require('null-ls').builtins.diagnostics.tsc,
-		require('null-ls').builtins.diagnostics.eslint,
-		require('null-ls').builtins.diagnostics.flake8,
-	}
+		null_ls.builtins.diagnostics.tsc,
+		null_ls.builtins.diagnostics.eslint,
+		null_ls.builtins.diagnostics.flake8,
+	},
 })
