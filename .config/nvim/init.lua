@@ -1,7 +1,2 @@
-require("config")
-require("plugins")
+require("plugins").setup()
 require("settings")
-require("lsp")
-require("completion")
-require("treesitter")
-require("format")

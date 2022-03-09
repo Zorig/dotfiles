@@ -28,34 +28,35 @@ opt.undofile = true -- undo
 opt.undolevels = 100 -- undo history
 opt.history = 100 -- remember n lines
 opt.lazyredraw = true -- faster scroll
+opt.updatetime = 250 -- decrease update time
 opt.synmaxcol = 240 -- max cols for syntax highlight
 opt.hidden = true -- wont save while switching buffer
 opt.clipboard = "unnamedplus" -- system clipboard
+opt.showmode = false -- no mode on status
+opt.encoding = "utf8"
+vim.wo.signcolumn = "yes" -- sign on column
+g.python3_host_prog = "/usr/bin/python3"
+opt.fillchars = {
+	vert = "│",
+	fold = " ",
+	eob = " ", -- suppress ~ at EndOfBuffer
+	--diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+	msgsep = "‾",
+	foldopen = "▾",
+	foldsep = "│",
+	foldclose = "▸",
+}
+
 opt.tabstop = 2 -- tab size == 4 spaces
 opt.shiftwidth = 2 -- shift 4 spaces on tab
 opt.softtabstop = 2
 
-vim.wo.signcolumn = "yes:1" -- sign on column
-opt.showmode = false -- no mode on status
-opt.encoding = "utf8"
-g.python3_host_prog = "/usr/bin/python3"
-opt.fillchars = {
-  vert = "│",
-  fold = " ",
-  eob = " ", -- suppress ~ at EndOfBuffer
-  --diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
-  msgsep = "‾",
-  foldopen = "▾",
-  foldsep = "│",
-  foldclose = "▸",
-}
-
 function MyFoldText()
-    local line = vim.fn.getline(vim.v.foldstart)
-    local nblines = vim.v.foldend - vim.v.foldstart + 1
-    return "  " .. line .. ": " .. nblines .. " lines"
+	local line = vim.fn.getline(vim.v.foldstart)
+	local nblines = vim.v.foldend - vim.v.foldstart + 1
+	return "  " .. line .. ": " .. nblines .. " lines"
 end
-opt.foldtext = 'v:lua.MyFoldText()'
+opt.foldtext = "v:lua.MyFoldText()"
 -----------------------------------------------------------
 -- Color
 --
@@ -107,8 +108,15 @@ map("n", "<leader>P", '"+p', { noremap = true })
 map("n", "<leader>s", ":w<cr>", default_opts)
 map("i", "<leader>s", "<C-c>:w<cr>", default_opts)
 --- Move current line / block with Alt-j/k ala vscode.
-map("x", "<C-S-k>", ":m '<-2<CR>gv=gv", {noremap = true})
-map("x", "<C-S-j>", ":m '>+1<CR>gv=gv", {noremap = true})
+map("x", "<C-S-k>", ":m '<-2<CR>gv=gv", { noremap = true })
+map("x", "<C-S-j>", ":m '>+1<CR>gv=gv", { noremap = true })
 
-map('n', '<leader>[', ':bp<CR>', default_opts)
-map('n', '<leader>]', ':bn<CR>', default_opts)
+map("n", "<leader>[", ":bp<CR>", default_opts)
+map("n", "<leader>]", ":bn<CR>", default_opts)
+
+-- Treesitter based folding
+cmd([[
+  set foldlevel=20
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
+]])
