@@ -155,6 +155,16 @@ function M.setup()
 				disable = false,
 			},
 		}
+
+		use {
+			"windwp/nvim-autopairs",
+			wants = "nvim-treesitter",
+			opt = true,
+			module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
+			config = function()
+				require("config.autopairs").setup()
+			end,
+		}
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
 		if packer_bootstrap then

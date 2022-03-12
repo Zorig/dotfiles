@@ -1,5 +1,7 @@
 local M = {}
 
+-- Auto pairs
+
 function M.setup()
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -7,7 +9,10 @@ function M.setup()
   end
 
   local luasnip = require "luasnip"
+	local cmp_autopairs = require "nvim-autopairs.completion.cmp"
   local cmp = require "cmp"
+
+	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 
   cmp.setup {
     completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
