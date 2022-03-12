@@ -165,6 +165,30 @@ function M.setup()
 				require("config.autopairs").setup()
 			end,
 		}
+
+		use {
+			"windwp/nvim-ts-autotag",
+			wants = "nvim-treesitter",
+			event = "InsertEnter",
+			config = function()
+				require("nvim-ts-autotag").setup { enable = true }
+			end,
+		}
+
+		-- LSP
+		use {
+			"neovim/nvim-lspconfig",
+			opt = true,
+			event = "BufReadPre",
+			wants = { "cmp-nvim-lsp", "nvim-lsp-installer", "lsp_signature.nvim"},
+			config = function()
+				require("config.lsp").setup()
+			end,
+			requires = {
+				"williamboman/nvim-lsp-installer",
+				"ray-x/lsp_signature.nvim",
+			},
+		}
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
 		if packer_bootstrap then
