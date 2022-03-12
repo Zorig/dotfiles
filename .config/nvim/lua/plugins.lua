@@ -41,8 +41,19 @@ function M.setup()
 		-- Packer
 		use({ "wbthomason/packer.nvim" })
 
+		use {
+      "rcarriga/nvim-notify",
+      event = "VimEnter",
+      config = function()
+        vim.notify = require "notify"
+      end,
+    }
+
 		-- Finder
-		use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/plenary.nvim" } } })
+		use {
+			"nvim-telescope/telescope.nvim",
+			requires = {{'nvim-lua/plenary.nvim'}},
+		}
 
 		-- File
 		use({
@@ -52,104 +63,61 @@ function M.setup()
 				require("nvim-web-devicons").setup({ default = true })
 			end,
 		})
-		use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } })
+		use {
+			"kyazdani42/nvim-tree.lua",
+			requires = {
+				"kyazdani42/nvim-web-devicons",
+			},
+			cmd = { "NvimTreeToggle", "NvimTreeClose" },
+			config = function()
+				require("config.nvimtree").setup()
+			end,
+		}
+
+		use {
+			"folke/which-key.nvim",
+			config = function()
+				require("config.whichkey").setup()
+			end,
+		}
 
 		-- Git
-		use({ "tpope/vim-fugitive", cmd = "Git" })
+		use({ "tpope/vim-fugitive", cmd = {"Git", "GBrowse"} })
 		use("mhinz/vim-signify")
-		use({ "rhysd/git-messenger.vim", cmd = "GitMessenger" })
+		use({ "rhysd/git-messenger.vim"})
 
 		-- Status
 		use({
 			"nvim-lualine/lualine.nvim",
 			config = function()
-				require("config.status").setup()
+				require('config.lualine').setup()
 			end,
 		})
 		use({
 			"SmiteshP/nvim-gps",
 			requires = "nvim-treesitter/nvim-treesitter",
 			module = "nvim-gps",
+			wants = "nvim-treesitter",
 			config = function()
 				require("nvim-gps").setup()
 			end,
 		})
 
+		-- Treesitter
+		use {
+			"nvim-treesitter/nvim-treesitter",
+			 run = ":TSUpdate",
+			 config = function()
+				 require("config.treesitter").setup()
+			 end,
+		}
+
 		-- Misc
 		use({ "scrooloose/nerdcommenter", event = "BufReadPre" })
 		use({ "terryma/vim-multiple-cursors", event = "BufReadPre" })
 		use("wakatime/vim-wakatime")
-		use({ "Yggdroot/indentLine", event = "VimEnter" })
-		use({ "tpope/vim-surround", event = "BufReadPre" })
-		use({
-			"windwp/nvim-autopairs",
-			wants = "nvim-treesitter",
-			--module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
-			config = function()
-				require("autopairs").setup()
-			end,
-		})
-		-- Auto tag
-		use({
-			"windwp/nvim-ts-autotag",
-			wants = "nvim-treesitter",
-			config = function()
-				require("nvim-ts-autotag").setup({ enable = true })
-			end,
-		})
-
-		-- LSP
-		use({
-			"neovim/nvim-lspconfig",
-			wants = { "nvim-lsp-installer", "cmp-nvim-lsp", "lsp_signature.nvim", "null-ls.nvim" },
-			config = function()
-				require("lsp").setup()
-			end,
-			requires = {
-				"williamboman/nvim-lsp-installer",
-				"ray-x/lsp_signature.nvim",
-				"jose-elias-alvarez/null-ls.nvim",
-				"hrsh7th/cmp-nvim-lsp",
-			},
-		})
-		use({
-			"hrsh7th/nvim-cmp",
-			opt = true,
-			config = function()
-				require("cmp").setup()
-			end,
-			wants = { "LuaSnip" },
-			requires = {
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-				"hrsh7th/cmp-nvim-lua",
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-cmdline",
-				"hrsh7th/cmp-calc",
-				"hrsh7th/cmp-emoji",
-				"ray-x/cmp-treesitter",
-				"saadparwaiz1/cmp_luasnip",
-				"f3fora/cmp-spell",
-				{
-					"L3MON4D3/LuaSnip",
-					wants = "friendly-snippets",
-					config = function()
-						require("config.snippets").setup()
-					end,
-				},
-				"rafamadriz/friendly-snippets",
-				disable = false,
-			},
-		})
-
-		-- Treesitter
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-			config = function()
-				require("treesitter").setup()
-			end,
-		})
+		use({ "Yggdroot/indentLine", event = "BufReadPre" })
+		use({ "tpope/vim-surround", event = "InsertEnter" })
 
 		-- Color
 		use("folke/tokyonight.nvim")
@@ -157,6 +125,36 @@ function M.setup()
 		use({ "akinsho/toggleterm.nvim" })
 		use("glepnir/dashboard-nvim")
 
+
+		use {
+			"hrsh7th/nvim-cmp",
+			event = "InsertEnter",
+			opt = true,
+			config = function()
+				require("config.cmp").setup()
+			end,
+			wants = { "LuaSnip" },
+			requires = {
+				"hrsh7th/cmp-buffer",
+				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-nvim-lua",
+				"ray-x/cmp-treesitter",
+				"hrsh7th/cmp-cmdline",
+				"saadparwaiz1/cmp_luasnip",
+				"hrsh7th/cmp-calc",
+				"f3fora/cmp-spell",
+				"hrsh7th/cmp-emoji",
+				{
+					"L3MON4D3/LuaSnip",
+					wants = "friendly-snippets",
+					config = function()
+						require("config.luasnip").setup()
+					end,
+				},
+				"rafamadriz/friendly-snippets",
+				disable = false,
+			},
+		}
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
 		if packer_bootstrap then

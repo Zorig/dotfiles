@@ -10,6 +10,7 @@ local default_opts = { noremap = true, silent = true }
 -----------------------------------------------------------
 -- General
 --
+vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 g.mapleader = " " -- change leader
 g.maplocalleader = " " -- change leader
 opt.completeopt = "menuone,noselect" -- set completeopt to better completion
@@ -34,6 +35,7 @@ opt.hidden = true -- wont save while switching buffer
 opt.clipboard = "unnamedplus" -- system clipboard
 opt.showmode = false -- no mode on status
 opt.encoding = "utf8"
+opt.timeoutlen = 300
 vim.wo.signcolumn = "yes" -- sign on column
 g.python3_host_prog = "/usr/bin/python3"
 opt.fillchars = {
