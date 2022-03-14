@@ -14,6 +14,7 @@ local function keymappings(client, bufnr)
   keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
   keymap("n", "[e", "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
   keymap("n", "]e", "<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
+	keymap("n", "<space>f", '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
   -- Whichkey
   local keymap_l = {
@@ -23,9 +24,14 @@ local function keymappings(client, bufnr)
       a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
       d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" },
       i = { "<cmd>LspInfo<CR>", "Lsp Info" },
+			f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Document" },
     },
   }
   if client.resolved_capabilities.document_formatting then
+		vim.cmd [[augroup Format]]
+		vim.cmd [[autocmd! * <buffer>]]
+		vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
+		vim.cmd [[augroup END]]
     keymap_l.l.f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Document" }
   end
 

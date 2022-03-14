@@ -73,14 +73,12 @@ function M.setup()
 			}),
     },
     sources = {
+			{ name = 'nvim_lsp'},
       { name = "treesitter" },
       { name = "buffer" },
       { name = "luasnip" },
       { name = "nvim_lua" },
       { name = "path" },
-      { name = "spell" },
-      { name = "emoji" },
-      { name = "calc" },
     },
     documentation = {
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },

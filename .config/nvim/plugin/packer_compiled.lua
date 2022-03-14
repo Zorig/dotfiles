@@ -71,103 +71,44 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   LuaSnip = {
     config = { "\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19config.luasnip\frequire\0" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = true,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/LuaSnip",
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip",
     wants = { "friendly-snippets" }
   },
   ["cmp-buffer"] = {
-    after_files = { "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-buffer/after/plugin/cmp_buffer.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-buffer",
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
-  ["cmp-calc"] = {
-    after_files = { "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-calc/after/plugin/cmp_calc.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-calc",
-    url = "https://github.com/hrsh7th/cmp-calc"
-  },
   ["cmp-cmdline"] = {
-    after_files = { "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-cmdline/after/plugin/cmp_cmdline.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-cmdline",
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
     url = "https://github.com/hrsh7th/cmp-cmdline"
   },
-  ["cmp-emoji"] = {
-    after_files = { "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-emoji/after/plugin/cmp_emoji.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-emoji",
-    url = "https://github.com/hrsh7th/cmp-emoji"
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
   ["cmp-nvim-lua"] = {
-    after_files = { "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lua/after/plugin/cmp_nvim_lua.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lua",
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
     url = "https://github.com/hrsh7th/cmp-nvim-lua"
   },
   ["cmp-path"] = {
-    after_files = { "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-path/after/plugin/cmp_path.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-path",
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["cmp-spell"] = {
-    after_files = { "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-spell/after/plugin/cmp-spell.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-spell",
-    url = "https://github.com/f3fora/cmp-spell"
-  },
   ["cmp-treesitter"] = {
-    after_files = { "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-treesitter/after/plugin/cmp_treesitter.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp-treesitter",
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/cmp-treesitter",
     url = "https://github.com/ray-x/cmp-treesitter"
   },
   cmp_luasnip = {
-    after_files = { "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp_luasnip/after/plugin/cmp_luasnip.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/cmp_luasnip",
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["dashboard-nvim"] = {
@@ -176,12 +117,8 @@ _G.packer_plugins = {
     url = "https://github.com/glepnir/dashboard-nvim"
   },
   ["friendly-snippets"] = {
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/friendly-snippets",
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["git-messenger.vim"] = {
@@ -196,15 +133,6 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/indentLine",
     url = "https://github.com/Yggdroot/indentLine"
-  },
-  ["lsp_signature.nvim"] = {
-    load_after = {
-      ["nvim-lspconfig"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/lsp_signature.nvim",
-    url = "https://github.com/ray-x/lsp_signature.nvim"
   },
   ["lualine.nvim"] = {
     config = { "\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19config.lualine\frequire\0" },
@@ -229,12 +157,9 @@ _G.packer_plugins = {
     wants = { "nvim-treesitter" }
   },
   ["nvim-cmp"] = {
-    after = { "LuaSnip", "cmp-nvim-lua", "friendly-snippets", "cmp-spell", "cmp-treesitter", "cmp_luasnip", "cmp-emoji", "cmp-cmdline", "cmp-path", "cmp-buffer", "cmp-calc" },
     config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15config.cmp\frequire\0" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/nvim-cmp",
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp",
     wants = { "LuaSnip" }
   },
@@ -248,23 +173,17 @@ _G.packer_plugins = {
     wants = { "nvim-treesitter" }
   },
   ["nvim-lsp-installer"] = {
-    load_after = {
-      ["nvim-lspconfig"] = true
-    },
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/nvim-lsp-installer",
+    loaded = true,
+    path = "/Users/zorig/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
     url = "https://github.com/williamboman/nvim-lsp-installer"
   },
   ["nvim-lspconfig"] = {
-    after = { "lsp_signature.nvim", "nvim-lsp-installer" },
     config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15config.lsp\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
     path = "/Users/zorig/.local/share/nvim/site/pack/packer/opt/nvim-lspconfig",
-    url = "https://github.com/neovim/nvim-lspconfig",
-    wants = { "cmp-nvim-lsp", "nvim-lsp-installer", "lsp_signature.nvim" }
+    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-notify"] = {
     config = { "\27LJ\2\n2\0\0\4\0\3\0\0066\0\0\0006\1\2\0'\3\1\0B\1\2\2=\1\1\0K\0\1\0\frequire\vnotify\bvim\0" },
@@ -403,34 +322,44 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
+-- Config for: LuaSnip
+time([[Config for LuaSnip]], true)
+try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19config.luasnip\frequire\0", "config", "LuaSnip")
+time([[Config for LuaSnip]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15config.cmp\frequire\0", "config", "nvim-cmp")
+time([[Config for nvim-cmp]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\22config.treesitter\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19config.lualine\frequire\0", "config", "lualine.nvim")
-time([[Config for lualine.nvim]], false)
 -- Config for: which-key.nvim
 time([[Config for which-key.nvim]], true)
 try_loadstring("\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20config.whichkey\frequire\0", "config", "which-key.nvim")
 time([[Config for which-key.nvim]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19config.lualine\frequire\0", "config", "lualine.nvim")
+time([[Config for lualine.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file GBrowse lua require("packer.load")({'vim-fugitive'}, { cmd = "GBrowse", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeClose lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeClose", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Git lua require("packer.load")({'vim-fugitive'}, { cmd = "Git", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file GBrowse lua require("packer.load")({'vim-fugitive'}, { cmd = "GBrowse", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-ts-autotag', 'nvim-cmp', 'vim-surround'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufReadPre * ++once lua require("packer.load")({'indentLine', 'nvim-lspconfig', 'nerdcommenter', 'vim-multiple-cursors'}, { event = "BufReadPre *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'vim-surround', 'nvim-lspconfig', 'nvim-ts-autotag'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'nvim-lspconfig'}, { event = "BufRead *" }, _G.packer_plugins)]]
 vim.cmd [[au VimEnter * ++once lua require("packer.load")({'nvim-notify'}, { event = "VimEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufNewFile * ++once lua require("packer.load")({'nvim-lspconfig'}, { event = "BufNewFile *" }, _G.packer_plugins)]]
+vim.cmd [[au BufReadPre * ++once lua require("packer.load")({'nerdcommenter', 'vim-multiple-cursors', 'indentLine'}, { event = "BufReadPre *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles(0) end

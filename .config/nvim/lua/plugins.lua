@@ -125,11 +125,21 @@ function M.setup()
 		use({ "akinsho/toggleterm.nvim" })
 		use("glepnir/dashboard-nvim")
 
+		-- LSP
+		use {
+			"neovim/nvim-lspconfig",
+			event = { "BufRead", "BufNewFile", "InsertEnter" },
+			config = function()
+				require("config.lsp").setup()
+			end,
+			requires = {
+				"williamboman/nvim-lsp-installer",
+			},
+		}
 
+		-- completion
 		use {
 			"hrsh7th/nvim-cmp",
-			event = "InsertEnter",
-			opt = true,
 			config = function()
 				require("config.cmp").setup()
 			end,
@@ -141,9 +151,7 @@ function M.setup()
 				"ray-x/cmp-treesitter",
 				"hrsh7th/cmp-cmdline",
 				"saadparwaiz1/cmp_luasnip",
-				"hrsh7th/cmp-calc",
-				"f3fora/cmp-spell",
-				"hrsh7th/cmp-emoji",
+				"hrsh7th/cmp-nvim-lsp",
 				{
 					"L3MON4D3/LuaSnip",
 					wants = "friendly-snippets",
@@ -159,7 +167,6 @@ function M.setup()
 		use {
 			"windwp/nvim-autopairs",
 			wants = "nvim-treesitter",
-			opt = true,
 			module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
 			config = function()
 				require("config.autopairs").setup()
@@ -175,20 +182,6 @@ function M.setup()
 			end,
 		}
 
-		-- LSP
-		use {
-			"neovim/nvim-lspconfig",
-			opt = true,
-			event = "BufReadPre",
-			wants = { "cmp-nvim-lsp", "nvim-lsp-installer", "lsp_signature.nvim"},
-			config = function()
-				require("config.lsp").setup()
-			end,
-			requires = {
-				"williamboman/nvim-lsp-installer",
-				"ray-x/lsp_signature.nvim",
-			},
-		}
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
 		if packer_bootstrap then
