@@ -40,17 +40,8 @@ local function on_attach(client, bufnr)
   -- See `:help formatexpr` for more information.
   vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
- client.resolved_capabilities.document_formatting = false
+	client.resolved_capabilities.document_formatting = false
 	client.resolved_capabilities.document_range_formatting = false
-
-	if client.resolved_capabilities.document_formatting then
-		vim.cmd [[
-      augroup LspFormat
-        autocmd! * <buffer>
-        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 2000) 
-      augroup END
-    ]]
-	end
 
   -- Configure key mappings
   require("config.lsp.keymaps").setup(client, bufnr)
@@ -71,7 +62,7 @@ local opts = {
 require("config.lsp.handlers").setup()
 
 function M.setup()
-	require("config.lsp.nullls").setup(opts)
+	require("config.lsp.null-ls").setup(opts)
   require("config.lsp.installer").setup(servers, opts)
 end
 
