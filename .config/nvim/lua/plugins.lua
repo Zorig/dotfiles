@@ -52,7 +52,7 @@ function M.setup()
 		-- Finder
 		use {
 			"nvim-telescope/telescope.nvim",
-			requires = {{'nvim-lua/plenary.nvim'}},
+			requires = {{'nvim-lua/plenary.nvim', module = "plenary"}},
 		}
 
 		-- File
@@ -76,6 +76,7 @@ function M.setup()
 
 		use {
 			"folke/which-key.nvim",
+			event = "VimEnter",
 			config = function()
 				require("config.whichkey").setup()
 			end,
@@ -107,10 +108,15 @@ function M.setup()
 		-- Treesitter
 		use {
 			"nvim-treesitter/nvim-treesitter",
-			 run = ":TSUpdate",
-			 config = function()
-				 require("config.treesitter").setup()
-			 end,
+			run = ":TSUpdate",
+			opt = true,
+			event = "BufRead",
+			config = function()
+				require("config.treesitter").setup()
+			end,
+			requires = {
+        { "nvim-treesitter/nvim-treesitter-textobjects" },
+      },
 		}
 
 		-- Misc
