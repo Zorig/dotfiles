@@ -89,6 +89,7 @@ function M.setup()
 		-- Status
 		use({
 			"nvim-lualine/lualine.nvim",
+			after = "nvim-treesitter",
 			config = function()
 				require('config.lualine').setup()
 			end,
@@ -125,21 +126,15 @@ function M.setup()
 		use({ "akinsho/toggleterm.nvim" })
 		use("glepnir/dashboard-nvim")
 
-		-- LSP
-		use {
-			"neovim/nvim-lspconfig",
-			event = { "BufRead", "BufNewFile", "InsertEnter" },
-			config = function()
-				require("config.lsp").setup()
-			end,
-			requires = {
-				"williamboman/nvim-lsp-installer",
-			},
-		}
+		use {"williamboman/nvim-lsp-installer"}
+
+		use {"jose-elias-alvarez/null-ls.nvim"}
 
 		-- completion
 		use {
 			"hrsh7th/nvim-cmp",
+			event = "InsertEnter",
+			opt = true,
 			config = function()
 				require("config.cmp").setup()
 			end,
@@ -154,13 +149,14 @@ function M.setup()
 				"hrsh7th/cmp-nvim-lsp",
 				{
 					"L3MON4D3/LuaSnip",
-					wants = "friendly-snippets",
+					wants = { "friendly-snippets", "vim-snippets" },
 					config = function()
 						require("config.luasnip").setup()
 					end,
 				},
 				"rafamadriz/friendly-snippets",
-				disable = false,
+				"honza/vim-snippets",
+				disable = true
 			},
 		}
 
@@ -179,6 +175,45 @@ function M.setup()
 			event = "InsertEnter",
 			config = function()
 				require("nvim-ts-autotag").setup { enable = true }
+			end,
+		}
+
+		-- LSP
+		use {
+			"neovim/nvim-lspconfig",
+			opt = true,
+			event = { "BufRead", "BufNewFile", "InsertEnter" },
+			wants = {"nvim-lsp-installer", "cmp-nvim-lsp", "null-ls.nvim"},
+			config = function()
+				require("config.lsp").setup()
+			end,
+			requires = {
+				"williamboman/nvim-lsp-installer",
+				"jose-elias-alvarez/null-ls.nvim",
+			}
+		}
+		--Test
+		use {
+			"rcarriga/vim-ultest",
+			requires = { "vim-test/vim-test" },
+			opt = true,
+			keys = { "<leader>t" },
+			cmd = {
+				"TestNearest",
+				"TestFile",
+				"TestSuite",
+				"TestLast",
+				"TestVisit",
+				"Ultest",
+				"UltestNearest",
+				"UltestDebug",
+				"UltestLast",
+				"UltestSummary",
+			},
+			module = "ultest",
+			run = ":UpdateRemotePlugins",
+			config = function()
+				require("config.test").setup()
 			end,
 		}
 

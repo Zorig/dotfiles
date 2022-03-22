@@ -13,7 +13,7 @@ function M.setup(servers, options)
       end)
 
       if not server:is_installed() then
-				vim.notify("Installing" .. server.name, vim.log.levels.INFO, { title = "LSP install" })
+				vim.notify("Installing " .. server.name, vim.log.levels.INFO, { title = "LSP install" })
         server:install()
       end
     else

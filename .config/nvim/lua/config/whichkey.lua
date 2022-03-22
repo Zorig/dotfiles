@@ -29,7 +29,18 @@ function M.setup()
       c = { "<Cmd>bd!<Cr>", "Close current buffer" },
       D = { "Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
     },
-
+		t = {
+			name = "Test",
+			S = { "<cmd>UltestSummary<cr>", "Summary" },
+			a = { "<cmd>Ultest<cr>", "All" },
+			d = { "<cmd>UltestDebug<cr>", "Debug" },
+			f = { "<cmd>TestFile<cr>", "File" },
+			l = { "<cmd>TestLast<cr>", "Last" },
+			n = { "<cmd>TestNearest<cr>", "Nearest" },
+			o = { "<cmd>UltestOutput<cr>", "Output" },
+			s = { "<cmd>TestSuite<cr>", "Suite" },
+			v = { "<cmd>TestVisit<cr>", "Visit" },
+		},
     z = {
       name = "Packer",
       c = { "<cmd>PackerCompile<cr>", "Compile" },
