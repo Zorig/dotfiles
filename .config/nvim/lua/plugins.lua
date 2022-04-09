@@ -41,19 +41,19 @@ function M.setup()
 		-- Packer
 		use({ "wbthomason/packer.nvim" })
 
-		use {
-      "rcarriga/nvim-notify",
-      event = "VimEnter",
-      config = function()
-        vim.notify = require "notify"
-      end,
-    }
+		use({
+			"rcarriga/nvim-notify",
+			event = "VimEnter",
+			config = function()
+				vim.notify = require("notify")
+			end,
+		})
 
 		-- Finder
-		use {
+		use({
 			"nvim-telescope/telescope.nvim",
-			requires = {{'nvim-lua/plenary.nvim', module = "plenary"}},
-		}
+			requires = { { "nvim-lua/plenary.nvim", module = "plenary" } },
+		})
 
 		-- File
 		use({
@@ -63,7 +63,7 @@ function M.setup()
 				require("nvim-web-devicons").setup({ default = true })
 			end,
 		})
-		use {
+		use({
 			"kyazdani42/nvim-tree.lua",
 			requires = {
 				"kyazdani42/nvim-web-devicons",
@@ -72,27 +72,35 @@ function M.setup()
 			config = function()
 				require("config.nvimtree").setup()
 			end,
-		}
+		})
 
-		use {
+		use({
 			"folke/which-key.nvim",
 			event = "VimEnter",
 			config = function()
 				require("config.whichkey").setup()
 			end,
-		}
+		})
 
 		-- Git
-		use({ "tpope/vim-fugitive", cmd = {"Git", "GBrowse"} })
-		use("mhinz/vim-signify")
-		use({ "rhysd/git-messenger.vim"})
+		use({ "tpope/vim-fugitive", cmd = { "Git", "GBrowse" } })
+		use({
+			"lewis6991/gitsigns.nvim",
+			requires = {
+				"nvim-lua/plenary.nvim",
+			},
+			config = function()
+				require("gitsigns").setup()
+			end,
+		})
+		use({ "rhysd/git-messenger.vim" })
 
 		-- Status
 		use({
 			"nvim-lualine/lualine.nvim",
 			after = "nvim-treesitter",
 			config = function()
-				require('config.lualine').setup()
+				require("config.lualine").setup()
 			end,
 		})
 		use({
@@ -106,7 +114,7 @@ function M.setup()
 		})
 
 		-- Treesitter
-		use {
+		use({
 			"nvim-treesitter/nvim-treesitter",
 			run = ":TSUpdate",
 			opt = true,
@@ -115,9 +123,9 @@ function M.setup()
 				require("config.treesitter").setup()
 			end,
 			requires = {
-        { "nvim-treesitter/nvim-treesitter-textobjects" },
-      },
-		}
+				{ "nvim-treesitter/nvim-treesitter-textobjects" },
+			},
+		})
 
 		-- Misc
 		use({ "scrooloose/nerdcommenter", event = "BufReadPre" })
@@ -132,12 +140,12 @@ function M.setup()
 		use({ "akinsho/toggleterm.nvim" })
 		use("glepnir/dashboard-nvim")
 
-		use {"williamboman/nvim-lsp-installer"}
+		use({ "williamboman/nvim-lsp-installer" })
 
-		use {"jose-elias-alvarez/null-ls.nvim"}
+		use({ "jose-elias-alvarez/null-ls.nvim" })
 
 		-- completion
-		use {
+		use({
 			"hrsh7th/nvim-cmp",
 			event = "InsertEnter",
 			opt = true,
@@ -162,44 +170,44 @@ function M.setup()
 				},
 				"rafamadriz/friendly-snippets",
 				"honza/vim-snippets",
-				disable = true
+				disable = true,
 			},
-		}
+		})
 
-		use {
+		use({
 			"windwp/nvim-autopairs",
 			wants = "nvim-treesitter",
 			module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
 			config = function()
 				require("config.autopairs").setup()
 			end,
-		}
+		})
 
-		use {
+		use({
 			"windwp/nvim-ts-autotag",
 			wants = "nvim-treesitter",
 			event = "InsertEnter",
 			config = function()
-				require("nvim-ts-autotag").setup { enable = true }
+				require("nvim-ts-autotag").setup({ enable = true })
 			end,
-		}
+		})
 
 		-- LSP
-		use {
+		use({
 			"neovim/nvim-lspconfig",
 			opt = true,
 			event = { "BufRead", "BufNewFile", "InsertEnter" },
-			wants = {"nvim-lsp-installer", "cmp-nvim-lsp", "null-ls.nvim"},
+			wants = { "nvim-lsp-installer", "cmp-nvim-lsp", "null-ls.nvim" },
 			config = function()
 				require("config.lsp").setup()
 			end,
 			requires = {
 				"williamboman/nvim-lsp-installer",
 				"jose-elias-alvarez/null-ls.nvim",
-			}
-		}
+			},
+		})
 		--Test
-		use {
+		use({
 			"rcarriga/vim-ultest",
 			requires = { "vim-test/vim-test" },
 			opt = true,
@@ -221,7 +229,7 @@ function M.setup()
 			config = function()
 				require("config.test").setup()
 			end,
-		}
+		})
 
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
