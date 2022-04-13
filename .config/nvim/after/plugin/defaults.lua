@@ -35,7 +35,7 @@ opt.hidden = true -- wont save while switching buffer
 opt.clipboard = "unnamedplus" -- system clipboard
 opt.showmode = false -- no mode on status
 opt.encoding = "utf8"
-opt.timeoutlen = 300
+opt.timeoutlen = 500
 vim.wo.signcolumn = "yes" -- sign on column
 g.python3_host_prog = "/usr/bin/python3"
 opt.fillchars = {
@@ -66,7 +66,6 @@ g.tokyonight_italic_functions = true
 g.tokyonight_italic_variables = true
 cmd([[colorscheme tokyonight]])
 
-
 -----------------------------------------------------------
 -- KeyMap
 --- move around splits using Ctrl + {h,j,k,l}
@@ -80,8 +79,8 @@ map("n", "<leader>p", '"*p', { noremap = true })
 map("n", "<leader>Y", '"+y', { noremap = true })
 map("n", "<leader>P", '"+p', { noremap = true })
 --- Fast save
-map("n", "<leader>s", ":w<cr>", default_opts)
-map("i", "<leader>s", "<C-c>:w<cr>", default_opts)
+--map("n", "<leader>s", ":w<cr>", default_opts)
+--map("i", "<leader>s", "<C-c>:w<cr>", default_opts)
 --- Move current line / block with Alt-j/k ala vscode.
 map("x", "<C-S-k>", ":m '<-2<CR>gv=gv", { noremap = true })
 map("x", "<C-S-j>", ":m '>+1<CR>gv=gv", { noremap = true })

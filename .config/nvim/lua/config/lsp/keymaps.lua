@@ -14,7 +14,6 @@ local function keymappings(client, bufnr)
   keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
   keymap("n", "[e", "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
   keymap("n", "]e", "<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
-	keymap("n", "<space>f", '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
   -- Whichkey
   local keymap_l = {

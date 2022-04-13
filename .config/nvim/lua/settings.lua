@@ -3,10 +3,8 @@ local map = vim.api.nvim_set_keymap
 local default_opts = { noremap = true, silent = true }
 
 map("n", "<C-_>", ":NvimTreeToggle<CR>", default_opts)
+map("n", "<C-p>", ":Telescope find_files<CR>", default_opts)
 map("n", "<leader>r", ":NvimTreeRefresh<CR>", default_opts)
-
-map("n", "<C-p>", ":Telescope find_files<cr>", default_opts)
-
 map("n", "<leader>gm", ":GitMessengers<cr>", default_opts)
 
 -- Indentline
@@ -17,20 +15,20 @@ g.indentLine_setColors = 1
 g.indentLine_fileTypeExclude = { "dashboard" }
 
 ---- ToggleTerm
-require("toggleterm").setup({
-	size = 20,
-	open_mapping = [[<c-\>]],
-	hide_numbers = true,
-	direction = "float",
-	shell = vim.o.shell,
-	close_on_exit = true,
-	shade_terminals = true,
-	float_opts = {
-		border = "curved",
-		winbled = 0,
-		highlights = { border = "Normal", background = "Normal" },
-	},
-})
+--require("toggleterm").setup({
+	--size = 20,
+	--open_mapping = [[<c-\>]],
+	--hide_numbers = true,
+	--direction = "float",
+	--shell = vim.o.shell,
+	--close_on_exit = true,
+	--shade_terminals = true,
+	--float_opts = {
+		--border = "curved",
+		--winbled = 0,
+		--highlights = { border = "Normal", background = "Normal" },
+	--},
+--})
 --vim.api.nvim_set_keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", { noremap = true, silent = true })
 --vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", { noremap = true, silent = true })
 --vim.api.nvim_set_keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", { noremap = true, silent = true })

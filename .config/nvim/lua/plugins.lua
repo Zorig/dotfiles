@@ -52,6 +52,7 @@ function M.setup()
 		-- Finder
 		use({
 			"nvim-telescope/telescope.nvim",
+			event = "VimEnter",
 			requires = { { "nvim-lua/plenary.nvim", module = "plenary" } },
 		})
 
@@ -86,6 +87,7 @@ function M.setup()
 		use({ "tpope/vim-fugitive", cmd = { "Git", "GBrowse" } })
 		use({
 			"lewis6991/gitsigns.nvim",
+			event = "BufRead",
 			requires = {
 				"nvim-lua/plenary.nvim",
 			},
@@ -93,7 +95,7 @@ function M.setup()
 				require("gitsigns").setup()
 			end,
 		})
-		use({ "rhysd/git-messenger.vim" })
+		use({ "rhysd/git-messenger.vim", cmd = { "GitMessenger" } })
 
 		-- Status
 		use({
@@ -137,7 +139,13 @@ function M.setup()
 		-- Color
 		use("folke/tokyonight.nvim")
 
-		use({ "akinsho/toggleterm.nvim" })
+		use({
+			"akinsho/toggleterm.nvim",
+			config = function()
+				require("config.terminal").setup()
+			end,
+		})
+
 		use("glepnir/dashboard-nvim")
 
 		use({ "williamboman/nvim-lsp-installer" })

@@ -5,7 +5,9 @@ function M.setup()
 		ensure_installed = { "css", "html", "graphql", "javascript", "json", "lua", "typescript", "python" },
 		sync_install = false,
 		highlight = {
-			enable = true
+			enable = true,
+			additional_vim_regex_highlighting = false,
+			disable = {"python"}
 		},
 		indent = {
 			enable = true

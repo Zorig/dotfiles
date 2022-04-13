@@ -22,14 +22,17 @@ function M.setup()
 	local mappings = {
 		["w"] = { "<cmd>update!<CR>", "Save" },
 		["q"] = { "<cmd>q!<CR>", "Quit" },
-		["fg"] = { "<cmd>Telescope live_grep<CR>", "Find Word" },
-		["bg"] = { "<cmd>Telescope buffers<CR>", "Buffers" },
-		["gm"] = { "<cmd>GitMessenger<CR>", "Git messenger" },
 
 		b = {
 			name = "Buffer",
 			c = { "<Cmd>bd!<Cr>", "Close current buffer" },
 			D = { "Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
+			b = { "<cmd>Telescope buffers<CR>", "Buffers List" },
+		},
+		f = {
+			name = "Telescope",
+			f = { "<cmd>Telescope find_files<cr>", "Find Files" },
+			g = { "<cmd>Telescope live_grep<cr>", "Find Word" },
 		},
 		t = {
 			name = "Test",
