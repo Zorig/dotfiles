@@ -52,9 +52,11 @@ local function on_attach(client, bufnr)
 	-- See `:help formatexpr` for more information.
 	vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
-	if client.name == "tsserver" or client.name == "pylsp" then
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
+	for _, value in ipairs({ "tsserver", "pylsp", "jsonls" }) do
+		if client.name == value then
+			client.resolved_capabilities.document_formatting = false
+			client.resolved_capabilities.document_range_formatting = false
+		end
 	end
 
 	-- Configure key mappings
