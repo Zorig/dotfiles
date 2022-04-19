@@ -52,6 +52,11 @@ local function on_attach(client, bufnr)
 	-- See `:help formatexpr` for more information.
 	vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
+	if client.name == "tsserver" or client.name == "pylsp" then
+		client.resolved_capabilities.document_formatting = false
+		client.resolved_capabilities.document_range_formatting = false
+	end
+
 	-- Configure key mappings
 	require("config.lsp.keymaps").setup(client, bufnr)
 	require("config.lsp.highlighting").setup(client)
