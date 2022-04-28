@@ -34,6 +34,18 @@ function M.setup()
 			f = { "<cmd>Telescope find_files<cr>", "Find Files" },
 			g = { "<cmd>Telescope live_grep<cr>", "Find Word" },
 		},
+		r = {
+			name = "Refactor",
+			e = { [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], "Extract Function" },
+			f = {
+				[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function to File')<CR>]],
+				"Extract Function to File",
+			},
+			v = { [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], "Extract Variable" },
+			i = { [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "Inline Variable" },
+			r = { [[ <Esc><Cmd>lua require('telescope').extensions.refactoring.refactors()<CR>]], "Refactor" },
+			V = { [[ <Esc><Cmd>lua require('refactoring').debug.print_var({})<CR>]], "Debug Print Var" },
+		},
 		t = {
 			name = "Test",
 			S = { "<cmd>UltestSummary<cr>", "Summary" },

@@ -84,10 +84,11 @@ function M.setup()
 		})
 
 		-- Git
-		use({ "tpope/vim-fugitive", cmd = { "Git", "GBrowse" } })
+		use({ "tpope/vim-fugitive", cmd = { "Git", "GBrowse", "Gdiffsplit", "Gvdiffsplit" } })
 		use({
 			"lewis6991/gitsigns.nvim",
-			event = "BufRead",
+			event = "BufReadPre",
+			wants = "plenary.nvim",
 			requires = {
 				"nvim-lua/plenary.nvim",
 			},
@@ -132,7 +133,7 @@ function M.setup()
 		-- Misc
 		use({ "scrooloose/nerdcommenter", event = "BufReadPre" })
 		use({ "terryma/vim-multiple-cursors", event = "BufReadPre" })
-		use("wakatime/vim-wakatime")
+		use({ "wakatime/vim-wakatime", event = "VimEnter" })
 		use({ "Yggdroot/indentLine", event = "BufReadPre" })
 		use({ "tpope/vim-surround", event = "InsertEnter" })
 
@@ -141,6 +142,8 @@ function M.setup()
 
 		use({
 			"akinsho/toggleterm.nvim",
+			cmd = { "ToggleTerm", "TermExec" },
+			keys = { [[<C-\>]] },
 			config = function()
 				require("config.terminal").setup()
 			end,
@@ -181,6 +184,9 @@ function M.setup()
 				disable = true,
 			},
 		})
+
+		-- AI completion
+		use({ "github/copilot.vim", event = "InsertEnter" })
 
 		use({
 			"windwp/nvim-autopairs",
@@ -236,6 +242,17 @@ function M.setup()
 			run = ":UpdateRemotePlugins",
 			config = function()
 				require("config.test").setup()
+			end,
+		})
+
+		--Refactor
+		use({
+			"ThePrimeagen/refactoring.nvim",
+			module = { "refactoring", "telescope" },
+			keys = { [[<leader>r]] },
+			wants = { "telescope.nvim" },
+			config = function()
+				require("config.refactoring").setup()
 			end,
 		})
 

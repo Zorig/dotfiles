@@ -7,9 +7,8 @@ function M.setup()
 		open_mapping = [[<c-\>]],
 		hide_numbers = true,
 		direction = "float",
-		shell = vim.o.shell,
 		close_on_exit = true,
-		shade_terminals = true,
+		shade_terminals = false,
 		float_opts = {
 			border = "curved",
 			winbled = 0,
