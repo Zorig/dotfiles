@@ -256,6 +256,14 @@ function M.setup()
 			end,
 		})
 
+		use({
+			"karb94/neoscroll.nvim",
+			event = "VimEnter",
+			config = function()
+				require("neoscroll").setup()
+			end,
+		})
+
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
 		if packer_bootstrap then
