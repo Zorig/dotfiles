@@ -149,8 +149,6 @@ function M.setup()
 			end,
 		})
 
-		use("glepnir/dashboard-nvim")
-
 		use({ "williamboman/nvim-lsp-installer" })
 
 		use({ "jose-elias-alvarez/null-ls.nvim" })
@@ -174,13 +172,12 @@ function M.setup()
 				"hrsh7th/cmp-nvim-lsp",
 				{
 					"L3MON4D3/LuaSnip",
-					wants = { "friendly-snippets", "vim-snippets" },
+					wants = { "friendly-snippets" },
 					config = function()
 						require("config.luasnip").setup()
 					end,
 				},
 				"rafamadriz/friendly-snippets",
-				"honza/vim-snippets",
 				disable = true,
 			},
 		})

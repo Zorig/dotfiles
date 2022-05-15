@@ -33,6 +33,14 @@ function M.setup()
 			name = "Telescope",
 			f = { "<cmd>Telescope find_files<cr>", "Find Files" },
 			g = { "<cmd>Telescope live_grep<cr>", "Find Word" },
+			m = { "<cmd>Telescope marks<cr>", "Marks" },
+		},
+		g = {
+			name = "Git [Signs & Messenger]",
+			s = { "<cmd>Gitsigns toggle_signs<cr>", "[GITSIGNS] Toggle signs" },
+			h = { "<cmd>Gitsigns preview_hunk<cr>", "[GITSIGNS] Preview hunk" },
+			d = { "<cmd>Gitsigns diffthis<cr>", "[GITSIGNS] Show diff" },
+			m = { "<cmd>GitMessenger<cr>", "[Git Messenger] Blame line" },
 		},
 		r = {
 			name = "Refactor",
@@ -69,6 +77,15 @@ function M.setup()
 	}
 
 	whichkey.setup(conf)
+	whichkey.register({
+		["<C-_>"] = { "<cmd>NvimTreeToggle<cr> <cmd>NvimTreeRefresh<cr>", "NvimTree Toggle" },
+	}, {
+		mode = "n", -- Normal mode
+		prefix = "",
+		silent = true, -- use `silent` when creating keymaps
+		noremap = true, -- use `noremap` when creating keymaps
+		nowait = false, -- use `nowait` when creating keymaps
+	})
 	whichkey.register(mappings, opts)
 end
 

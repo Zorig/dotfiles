@@ -1,5 +1,4 @@
 require("plugins").setup()
-require("settings")
 
 -----------------------------------------------------------
 -- Startup

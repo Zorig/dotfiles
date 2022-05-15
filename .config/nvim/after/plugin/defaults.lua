@@ -53,12 +53,12 @@ opt.tabstop = 2 -- tab size == 4 spaces
 opt.shiftwidth = 2 -- shift 4 spaces on tab
 opt.softtabstop = 2
 
-function MyFoldText()
-	local line = vim.fn.getline(vim.v.foldstart)
-	local nblines = vim.v.foldend - vim.v.foldstart + 1
-	return "  " .. line .. ": " .. nblines .. " lines"
-end
-opt.foldtext = "v:lua.MyFoldText()"
+--function MyFoldText()
+--local line = vim.fn.getline(vim.v.foldstart)
+--local nblines = vim.v.foldend - vim.v.foldstart + 1
+--return "  " .. line .. ": " .. nblines .. " lines"
+--end
+--opt.foldtext = "v:lua.MyFoldText()"
 -----------------------------------------------------------
 -- Color
 --
@@ -94,3 +94,8 @@ cmd([[
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
 ]])
+
+g.indentLine_first_char = "▏"
+g.indentLine_char_list = { "▏", "│", "┆", "┊" }
+g.indentLine_showFirstIndentLevel = 1
+g.indentLine_setColors = 1
