@@ -261,6 +261,14 @@ function M.setup()
 			end,
 		})
 
+		use({
+			"goolord/alpha-nvim",
+			requires = { "kyazdani42/nvim-web-devicons" },
+			config = function()
+				require("alpha").setup(require("alpha.themes.theta").config)
+			end,
+		})
+
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
 		if packer_bootstrap then
