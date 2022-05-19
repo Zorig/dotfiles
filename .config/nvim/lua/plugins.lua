@@ -53,7 +53,15 @@ function M.setup()
 		use({
 			"nvim-telescope/telescope.nvim",
 			event = "VimEnter",
-			requires = { { "nvim-lua/plenary.nvim", module = "plenary" } },
+			config = function ()
+			require('config.telescope').setup()
+			end,
+			requires = {
+				{ "nvim-lua/plenary.nvim", module = "plenary" },
+				{
+					"nvim-telescope/telescope-github.nvim",
+				},
+			},
 		})
 
 		-- File
@@ -242,16 +250,16 @@ function M.setup()
 			end,
 		})
 
-		--Refactor
-		use({
-			"ThePrimeagen/refactoring.nvim",
-			module = { "refactoring", "telescope" },
-			keys = { [[<leader>r]] },
-			wants = { "telescope.nvim" },
-			config = function()
-				require("config.refactoring").setup()
-			end,
-		})
+		----Refactor
+		--use({
+			--"ThePrimeagen/refactoring.nvim",
+			--module = { "refactoring", "telescope" },
+			--keys = { [[<leader>r]] },
+			--wants = { "telescope.nvim" },
+			--config = function()
+				--require("config.refactoring").setup()
+			--end,
+		--})
 
 		use({
 			"karb94/neoscroll.nvim",

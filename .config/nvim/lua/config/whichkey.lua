@@ -34,6 +34,8 @@ function M.setup()
 			f = { "<cmd>Telescope find_files<cr>", "Find Files" },
 			g = { "<cmd>Telescope live_grep<cr>", "Find Word" },
 			m = { "<cmd>Telescope marks<cr>", "Marks" },
+			i = { "<cmd>Telescope gh issues<cr>", "Github Issues" },
+			p = { "<cmd>Telescope gh pull_request<cr>", "Github PRs" },
 		},
 		g = {
 			name = "Git [Signs & Messenger]",
