@@ -37,6 +37,8 @@ antibody bundle zsh-users/zsh-completions
 antibody bundle marzocchi/zsh-notify
 antibody bundle buonomo/yarn-completion
 antibody bundle agkozak/zsh-z
+
+zstyle ':completion:*' menu select
 # Keybindings
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
