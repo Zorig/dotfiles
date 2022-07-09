@@ -1,5 +1,7 @@
 local M = {}
 
+local navic = require("nvim-navic")
+
 local servers = {
 	html = {},
 	jsonls = {},
@@ -62,9 +64,17 @@ local function on_attach(client, bufnr)
 	-- Configure key mappings
 	require("config.lsp.keymaps").setup(client, bufnr)
 	require("config.lsp.highlighting").setup(client)
+	if client.server_capabilities.documentSymbolProvider then
+		navic.attach(client, bufnr)
+	end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local opts = {

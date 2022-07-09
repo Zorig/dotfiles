@@ -53,8 +53,8 @@ function M.setup()
 		use({
 			"nvim-telescope/telescope.nvim",
 			event = "VimEnter",
-			config = function ()
-			require('config.telescope').setup()
+			config = function()
+				require("config.telescope").setup()
 			end,
 			requires = {
 				{ "nvim-lua/plenary.nvim", module = "plenary" },
@@ -115,13 +115,9 @@ function M.setup()
 			end,
 		})
 		use({
-			"SmiteshP/nvim-gps",
-			requires = "nvim-treesitter/nvim-treesitter",
-			module = "nvim-gps",
-			wants = "nvim-treesitter",
-			config = function()
-				require("nvim-gps").setup()
-			end,
+			"SmiteshP/nvim-navic",
+			requires = "neovim/nvim-lspconfig",
+			module = "nvim-navic",
 		})
 
 		-- Treesitter
@@ -250,17 +246,6 @@ function M.setup()
 			end,
 		})
 
-		----Refactor
-		--use({
-			--"ThePrimeagen/refactoring.nvim",
-			--module = { "refactoring", "telescope" },
-			--keys = { [[<leader>r]] },
-			--wants = { "telescope.nvim" },
-			--config = function()
-				--require("config.refactoring").setup()
-			--end,
-		--})
-
 		use({
 			"karb94/neoscroll.nvim",
 			event = "VimEnter",
@@ -277,6 +262,22 @@ function M.setup()
 			end,
 		})
 
+		use {
+			"kevinhwang91/nvim-ufo",
+			opt = true,
+			event = { "BufReadPre" },
+			wants = { "promise-async" },
+			requires = "kevinhwang91/promise-async",
+			config = function()
+				require("ufo").setup {
+					provider_selector = function(bufnr, filetype)
+						return { "lsp", "treesitter", "indent" }
+					end,
+				}
+				vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+				vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+			end,
+		}
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
 		if packer_bootstrap then

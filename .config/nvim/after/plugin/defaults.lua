@@ -88,14 +88,12 @@ map("x", "<C-S-j>", ":m '>+1<CR>gv=gv", { noremap = true })
 map("n", "<leader>[", ":bp<CR>", default_opts)
 map("n", "<leader>]", ":bn<CR>", default_opts)
 
--- Treesitter based folding
-cmd([[
-  set foldlevel=20
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-]])
-
 g.indentLine_first_char = "▏"
 g.indentLine_char_list = { "▏", "│", "┆", "┊" }
 g.indentLine_showFirstIndentLevel = 1
 g.indentLine_setColors = 1
+
+opt.foldcolumn = "1"
+opt.foldlevel = 99
+opt.foldlevelstart = -1
+opt.foldenable = true

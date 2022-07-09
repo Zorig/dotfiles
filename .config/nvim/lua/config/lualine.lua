@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-	local gps = require("nvim-gps")
+	local gps = require("nvim-navic")
 
 	require("lualine").setup({
 		options = {

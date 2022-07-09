@@ -22,7 +22,6 @@ local sources = {
 	b.formatting.fixjson,
 	b.formatting.isort,
 	b.formatting.black,
-	b.formatting.stylua,
 
 	-- actions
 	b.code_actions.gitsigns,
