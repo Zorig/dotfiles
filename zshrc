@@ -36,6 +36,9 @@ antibody bundle zsh-users/zsh-history-substring-search
 antibody bundle zsh-users/zsh-completions
 antibody bundle marzocchi/zsh-notify
 antibody bundle buonomo/yarn-completion
+antibody bundle agkozak/zsh-z
+
+zstyle ':completion:*' menu select
 # Keybindings
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -82,3 +85,30 @@ export NVM_DIR="$HOME/.nvm"
 	[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completionc
 export PATH=$HOME/bin:$PATH
+export PATH="/usr/local/opt/postgresql@12/bin:$PATH"
+
+function git_current_branch() {
+  local ref
+  ref=$(__git_prompt_git symbolic-ref --quiet HEAD 2> /dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return  # no git repo.
+    ref=$(__git_prompt_git rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  echo ${ref#refs/heads/}
+}
+
+alias g='git'
+alias ga='git add'
+alias gb='git branch'
+alias gc='git commit -v'
+alias gc!='git commit -v --amend'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gcm='git checkout $(git_main_branch)'
+alias ggpush='git push origin $(git_current_branch)'
+alias gl='git pull'
+alias gp='git push'
+alias gpsup='git push -u origin $(git_current_branch)'
+alias grmc='git rm --cached'
+alias gst='git status'
