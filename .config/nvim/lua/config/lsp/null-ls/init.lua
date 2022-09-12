@@ -25,7 +25,6 @@ local sources = {
 
 	-- actions
 	b.code_actions.gitsigns,
-	b.code_actions.refactoring,
 }
 
 function M.setup(opts)

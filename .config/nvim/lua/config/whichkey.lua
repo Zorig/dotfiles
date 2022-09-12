@@ -31,7 +31,7 @@ function M.setup()
 		},
 		f = {
 			name = "Telescope",
-			f = { "<cmd>Telescope find_files<cr>", "Find Files" },
+			f = { "<cmd>Telescope find_files hidden=true<cr>", "Find Files" },
 			g = { "<cmd>Telescope live_grep<cr>", "Find Word" },
 			m = { "<cmd>Telescope marks<cr>", "Marks" },
 			i = { "<cmd>Telescope gh issues<cr>", "Github Issues" },

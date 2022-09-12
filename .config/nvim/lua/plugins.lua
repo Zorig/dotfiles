@@ -153,8 +153,6 @@ function M.setup()
 			end,
 		})
 
-		use({ "williamboman/nvim-lsp-installer" })
-
 		use({ "jose-elias-alvarez/null-ls.nvim" })
 
 		-- completion
@@ -186,9 +184,6 @@ function M.setup()
 			},
 		})
 
-		-- AI completion
-		use({ "github/copilot.vim", event = "InsertEnter" })
-
 		use({
 			"windwp/nvim-autopairs",
 			wants = "nvim-treesitter",
@@ -212,38 +207,16 @@ function M.setup()
 			"neovim/nvim-lspconfig",
 			opt = true,
 			event = { "BufRead", "BufNewFile", "InsertEnter" },
-			wants = { "nvim-lsp-installer", "cmp-nvim-lsp", "null-ls.nvim" },
+			wants = { "mason.nvim", "mason-lspconfig.nvim", "mason-tool-installer.nvim", "cmp-nvim-lsp", "null-ls.nvim" },
 			config = function()
 				require("config.lsp").setup()
 			end,
 			requires = {
-				"williamboman/nvim-lsp-installer",
+				"williamboman/mason.nvim",
+				"williamboman/mason-lspconfig.nvim",
+				"WhoIsSethDaniel/mason-tool-installer.nvim",
 				"jose-elias-alvarez/null-ls.nvim",
 			},
-		})
-		--Test
-		use({
-			"rcarriga/vim-ultest",
-			requires = { "vim-test/vim-test" },
-			opt = true,
-			keys = { "<leader>t" },
-			cmd = {
-				"TestNearest",
-				"TestFile",
-				"TestSuite",
-				"TestLast",
-				"TestVisit",
-				"Ultest",
-				"UltestNearest",
-				"UltestDebug",
-				"UltestLast",
-				"UltestSummary",
-			},
-			module = "ultest",
-			run = ":UpdateRemotePlugins",
-			config = function()
-				require("config.test").setup()
-			end,
 		})
 
 		use({
@@ -271,7 +244,7 @@ function M.setup()
 			config = function()
 				require("ufo").setup {
 					provider_selector = function(bufnr, filetype)
-						return { "lsp", "treesitter", "indent" }
+						return { "lsp", "treesitter" }
 					end,
 				}
 				vim.keymap.set("n", "zR", require("ufo").openAllFolds)

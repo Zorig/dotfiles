@@ -5,12 +5,8 @@ function M.setup()
 	t.load_extension("gh")
 	t.setup({
 		defaults = {
-			vimgrep_arguments = {
-				"rg",
-				"--no-heading",
-				"-u",
-			},
-		},
+			file_ignore_patterns = { 'node_modules', '.git' }
+		}
 	})
 end
 

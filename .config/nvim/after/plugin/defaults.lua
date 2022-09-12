@@ -92,6 +92,7 @@ g.indentLine_first_char = "▏"
 g.indentLine_char_list = { "▏", "│", "┆", "┊" }
 g.indentLine_showFirstIndentLevel = 1
 g.indentLine_setColors = 1
+g.indentLine_setConceal = 0
 
 opt.foldcolumn = "1"
 opt.foldlevel = 99
