@@ -1,0 +1,12 @@
+require("mini.completion").setup({})
+require("mini.cursorword").setup({})
+require("mini.indentscope").setup({})
+require("mini.jump").setup({})
+require("mini.jump2d").setup({})
+require("mini.pairs").setup({})
+require("mini.tabline").setup({})
+
+require("config.mini.comment")
+require("config.mini.starter")
+require("config.mini.statusline")
+require("config.mini.surround")

@@ -41,20 +41,12 @@ function M.setup()
 		-- Packer
 		use({ "wbthomason/packer.nvim" })
 
-		use({
-			"rcarriga/nvim-notify",
-			event = "VimEnter",
-			config = function()
-				vim.notify = require("notify")
-			end,
-		})
-
 		-- Finder
 		use({
 			"nvim-telescope/telescope.nvim",
 			event = "VimEnter",
 			config = function()
-				require("config.telescope").setup()
+				require("config.telescope").setup({})
 			end,
 			requires = {
 				{ "nvim-lua/plenary.nvim", module = "plenary" },
@@ -79,7 +71,7 @@ function M.setup()
 			},
 			cmd = { "NvimTreeToggle", "NvimTreeClose" },
 			config = function()
-				require("config.nvimtree").setup()
+				require("config.nvimtree").setup({})
 			end,
 		})
 
@@ -87,7 +79,7 @@ function M.setup()
 			"folke/which-key.nvim",
 			event = "VimEnter",
 			config = function()
-				require("config.whichkey").setup()
+				require("config.whichkey").setup({})
 			end,
 		})
 
@@ -108,38 +100,14 @@ function M.setup()
 
 		-- Status
 		use({
-			"nvim-lualine/lualine.nvim",
-			after = "nvim-treesitter",
-			config = function()
-				require("config.lualine").setup()
-			end,
-		})
-		use({
 			"SmiteshP/nvim-navic",
 			requires = "neovim/nvim-lspconfig",
 			module = "nvim-navic",
 		})
 
-		-- Treesitter
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-			opt = true,
-			event = "BufRead",
-			config = function()
-				require("config.treesitter").setup()
-			end,
-			requires = {
-				{ "nvim-treesitter/nvim-treesitter-textobjects" },
-			},
-		})
-
 		-- Misc
-		use({ "scrooloose/nerdcommenter", event = "BufReadPre" })
 		use({ "terryma/vim-multiple-cursors", event = "BufReadPre" })
 		use({ "wakatime/vim-wakatime", event = "VimEnter" })
-		use({ "Yggdroot/indentLine", event = "BufReadPre" })
-		use({ "tpope/vim-surround", event = "InsertEnter" })
 
 		-- Color
 		use("folke/tokyonight.nvim")
@@ -153,70 +121,34 @@ function M.setup()
 			end,
 		})
 
-		use({ "jose-elias-alvarez/null-ls.nvim" })
-
-		-- completion
 		use({
-			"hrsh7th/nvim-cmp",
-			event = "InsertEnter",
-			opt = true,
+			"echasnovski/mini.nvim",
 			config = function()
-				require("config.cmp").setup()
-			end,
-			wants = { "LuaSnip" },
-			requires = {
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-				"hrsh7th/cmp-nvim-lua",
-				"ray-x/cmp-treesitter",
-				"hrsh7th/cmp-cmdline",
-				"saadparwaiz1/cmp_luasnip",
-				"hrsh7th/cmp-nvim-lsp",
-				{
-					"L3MON4D3/LuaSnip",
-					wants = { "friendly-snippets" },
-					config = function()
-						require("config.luasnip").setup()
-					end,
-				},
-				"rafamadriz/friendly-snippets",
-				disable = true,
-			},
-		})
-
-		use({
-			"windwp/nvim-autopairs",
-			wants = "nvim-treesitter",
-			module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
-			config = function()
-				require("config.autopairs").setup()
-			end,
-		})
-
-		use({
-			"windwp/nvim-ts-autotag",
-			wants = "nvim-treesitter",
-			event = "InsertEnter",
-			config = function()
-				require("nvim-ts-autotag").setup({ enable = true })
+				require("config.mini")
 			end,
 		})
 
 		-- LSP
 		use({
 			"neovim/nvim-lspconfig",
-			opt = true,
 			event = { "BufRead", "BufNewFile", "InsertEnter" },
-			wants = { "mason.nvim", "mason-lspconfig.nvim", "mason-tool-installer.nvim", "cmp-nvim-lsp", "null-ls.nvim" },
-			config = function()
-				require("config.lsp").setup()
-			end,
 			requires = {
 				"williamboman/mason.nvim",
 				"williamboman/mason-lspconfig.nvim",
 				"WhoIsSethDaniel/mason-tool-installer.nvim",
 				"jose-elias-alvarez/null-ls.nvim",
+				{
+					"L3MON4D3/LuaSnip",
+					wants = {"friendly-snippets"},
+					requires = {"rafamadriz/friendly-snippets"},
+					config = function()
+						require("config.luasnip")
+					end,
+				},
 			},
+			config = function()
+				require("config.lsp")
+			end,
 		})
 
 		use({
@@ -224,14 +156,6 @@ function M.setup()
 			event = "VimEnter",
 			config = function()
 				require("neoscroll").setup()
-			end,
-		})
-
-		use({
-			"goolord/alpha-nvim",
-			requires = { "kyazdani42/nvim-web-devicons" },
-			config = function()
-				require("alpha").setup(require("alpha.themes.theta").config)
 			end,
 		})
 
@@ -244,7 +168,7 @@ function M.setup()
 			config = function()
 				require("ufo").setup {
 					provider_selector = function(bufnr, filetype)
-						return { "lsp", "treesitter" }
+						return { "lsp" }
 					end,
 				}
 				vim.keymap.set("n", "zR", require("ufo").openAllFolds)
