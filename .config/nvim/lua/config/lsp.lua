@@ -191,6 +191,13 @@ local function on_attach(client, bufnr)
 		navic.attach(client, bufnr)
 	end
 
+	for _, value in ipairs({ "tsserver", "pylsp", "jsonls" }) do
+		if client.name == value then
+			client.resolved_capabilities.document_formatting = false
+			client.resolved_capabilities.document_range_formatting = false
+		end
+	end
+
 	keymappings(client, bufnr)
 	highlighting(client, bufnr)
 	formatting(client, bufnr)
@@ -205,6 +212,9 @@ lsp_handlers()
 
 local server_opts = {
 	on_attach = on_attach,
+	init_options = {
+		lint = true,
+	},
 	flags = {
 		debounce_text_changes = 150,
 	},
@@ -248,7 +258,7 @@ require("mason-lspconfig").setup_handlers({
 		nls.setup({
 			-- debug = true,
 			debounce = 150,
-			save_after_format = false,
+			save_after_format = true,
 			sources = sources,
 			on_attach = on_attach,
 			root_dir = nls_utils.root_pattern(".git"),

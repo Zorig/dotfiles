@@ -139,8 +139,8 @@ function M.setup()
 				"jose-elias-alvarez/null-ls.nvim",
 				{
 					"L3MON4D3/LuaSnip",
-					wants = {"friendly-snippets"},
-					requires = {"rafamadriz/friendly-snippets"},
+					wants = { "friendly-snippets" },
+					requires = { "rafamadriz/friendly-snippets" },
 					config = function()
 						require("config.luasnip")
 					end,
@@ -148,6 +148,18 @@ function M.setup()
 			},
 			config = function()
 				require("config.lsp")
+			end,
+		})
+
+		use({
+			"ThePrimeagen/refactoring.nvim",
+			event = { "BufRead" },
+			requires = {
+				{ "nvim-lua/plenary.nvim" },
+				{ "nvim-treesitter/nvim-treesitter" }
+			},
+			config = function()
+				require("config.refactoring")
 			end,
 		})
 
