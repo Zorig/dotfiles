@@ -1,4 +1,4 @@
-require("plugins").setup()
+require("zorig")
 
 -----------------------------------------------------------
 -- Startup
