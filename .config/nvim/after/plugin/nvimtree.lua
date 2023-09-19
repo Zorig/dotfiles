@@ -39,6 +39,6 @@ require("nvim-tree").setup({
 	view = {
 		side = "right",
 		signcolumn = "yes",
-		hide_root_folder = true,
+		-- hide_root_folder = true,
 	},
 })

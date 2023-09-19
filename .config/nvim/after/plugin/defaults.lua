@@ -49,6 +49,10 @@ opt.fillchars = {
 	foldclose = "▸",
 }
 
+opt.foldlevel = 1
+opt.foldlevelstart = 99
+opt.foldenable = true
+
 opt.tabstop = 2 -- tab size == 4 spaces
 opt.shiftwidth = 2 -- shift 4 spaces on tab
 opt.softtabstop = 2
@@ -93,7 +97,3 @@ g.indentLine_char_list = { "▏", "│", "┆", "┊" }
 g.indentLine_showFirstIndentLevel = 1
 g.indentLine_setColors = 1
 
-opt.foldcolumn = "1"
-opt.foldlevel = 99
-opt.foldlevelstart = -1
-opt.foldenable = true

@@ -112,3 +112,4 @@ alias gp='git push'
 alias gpsup='git push -u origin $(git_current_branch)'
 alias grmc='git rm --cached'
 alias gst='git status'
+export PATH="/usr/local/opt/ruby/bin:$PATH"
