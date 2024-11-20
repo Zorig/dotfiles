@@ -4,3 +4,4 @@
 local opt = vim.opt
 opt.cursorline = false
 opt.number = false
+opt.relativenumber = false
