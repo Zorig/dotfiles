@@ -1,0 +1,7 @@
+spaceship-prompt/spaceship-prompt
+spaceship-prompt/spaceship-vi-mode
+zdharma/fast-syntax-highlighting
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-completions
+agkozak/zsh-z

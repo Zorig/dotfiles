@@ -26,16 +26,10 @@ setopt interactive_comments # allow comments in interactive shells
 zstyle ':completion:*' menu select # select completions with arrow keys
 zstyle ':completion:*' group-name '' # group results by category
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
-# Load antibody plugin manager
-source <(antibody init)
-# Plugins
-antibody bundle spaceship-prompt/spaceship-prompt
-antibody bundle zdharma/fast-syntax-highlighting
-antibody bundle zsh-users/zsh-autosuggestions
-antibody bundle zsh-users/zsh-history-substring-search
-antibody bundle zsh-users/zsh-completions
-antibody bundle buonomo/yarn-completion
-antibody bundle agkozak/zsh-z
+# # Load antibody plugin manager
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+
+antidote load
 
 zstyle ':completion:*' menu select
 # Keybindings
@@ -60,13 +54,7 @@ SPACESHIP_PROMPT_ORDER=(
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
-# Simplify prompt if we're using Hyper
-if [[ "$TERM_PROGRAM" == "Hyper" ]]; then
-  SPACESHIP_PROMPT_SEPARATE_LINE=false
-  SPACESHIP_DIR_SHOW=false
-  SPACESHIP_GIT_BRANCH_SHOW=false
-fi
-antibody bundle denysdovhan/spaceship-prompt
+
 # Open new tabs in same directory
 if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
   function chpwd {
@@ -84,7 +72,6 @@ export NVM_DIR="$HOME/.nvm"
 	[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completionc
 export PATH=$HOME/bin:$PATH
-export PATH="/usr/local/opt/postgresql@12/bin:$PATH"
 
 function git_current_branch() {
   local ref
@@ -112,3 +99,9 @@ alias gpsup='git push -u origin $(git_current_branch)'
 alias grmc='git rm --cached'
 alias gst='git status'
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/zorig/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/zorig/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/zorig/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/zorig/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
