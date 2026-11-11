@@ -26,17 +26,10 @@ setopt interactive_comments # allow comments in interactive shells
 zstyle ':completion:*' menu select # select completions with arrow keys
 zstyle ':completion:*' group-name '' # group results by category
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
-# Load antibody plugin manager
-source <(antibody init)
-# Plugins
-antibody bundle spaceship-prompt/spaceship-prompt
-antibody bundle zdharma/fast-syntax-highlighting
-antibody bundle zsh-users/zsh-autosuggestions
-antibody bundle zsh-users/zsh-history-substring-search
-antibody bundle zsh-users/zsh-completions
-antibody bundle marzocchi/zsh-notify
-antibody bundle buonomo/yarn-completion
-antibody bundle agkozak/zsh-z
+# # Load antibody plugin manager
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+
+antidote load
 
 zstyle ':completion:*' menu select
 # Keybindings
@@ -44,30 +37,10 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^[[3~' delete-char
 bindkey '^[3;5~' delete-char
+
 # Theme
-SPACESHIP_PROMPT_ORDER=(
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-  hg            # Mercurial section (hg_branch  + hg_status)
-  exec_time     # Execution time
-  line_sep      # Line break
-  vi_mode       # Vi-mode indicator
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_CHAR_SYMBOL="❯"
-SPACESHIP_CHAR_SUFFIX=" "
-# Simplify prompt if we're using Hyper
-if [[ "$TERM_PROGRAM" == "Hyper" ]]; then
-  SPACESHIP_PROMPT_SEPARATE_LINE=false
-  SPACESHIP_DIR_SHOW=false
-  SPACESHIP_GIT_BRANCH_SHOW=false
-fi
-antibody bundle denysdovhan/spaceship-prompt
+eval "$(starship init zsh)"
+
 # Open new tabs in same directory
 if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
   function chpwd {
@@ -85,7 +58,6 @@ export NVM_DIR="$HOME/.nvm"
 	[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completionc
 export PATH=$HOME/bin:$PATH
-export PATH="/usr/local/opt/postgresql@12/bin:$PATH"
 
 function git_current_branch() {
   local ref
@@ -112,3 +84,38 @@ alias gp='git push'
 alias gpsup='git push -u origin $(git_current_branch)'
 alias grmc='git rm --cached'
 alias gst='git status'
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/zorig/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/zorig/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/zorig/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/zorig/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+. "$HOME/.local/bin/env"
+source <(fzf --zsh)
+
+# opencode
+export PATH=/Users/zorig/.opencode/bin:$PATH
+
+# pnpm
+export PNPM_HOME="/Users/zorig/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Added by Antigravity
+export PATH="/Users/zorig/.antigravity/antigravity/bin:$PATH"
+
+export EDITOR=nvim
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+export PATH=$PATH:$HOME/.local/opt/go/bin
+export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/go/bin
+
+# Added by Antigravity IDE
+export PATH="/Users/zorig/.antigravity-ide/antigravity-ide/bin:$PATH"

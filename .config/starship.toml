@@ -1,0 +1,76 @@
+# ~/.config/starship.toml
+# Ultra minimal - zero emojis, maximum clarity
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$python\
+$golang\
+$line_break"""
+
+# Disable cloud/container stuff
+[gcloud]
+disabled = true
+
+[aws]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[container]
+disabled = true
+
+# Directory - just the path
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "cyan"
+format = "[$path]($style) "
+
+# Git - text only
+[git_branch]
+symbol = ""
+style = "purple"
+format = "[$symbol$branch]($style) "
+
+# Git status - simple brackets
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "red"
+ahead = "↑"
+behind = "↓"
+diverged = "↕"
+untracked = "?"
+modified = "!"
+staged = "+"
+deleted = "x"
+
+# Runtimes - text symbols only
+[nodejs]
+symbol = ""
+format = "node:[$version]($style) "
+style = "green"
+detect_files = ["package.json"]
+
+[python]
+symbol = ""
+format = "py:[$version]($style) "
+style = "yellow"
+detect_files = ["requirements.txt", "pyproject.toml"]
+
+[golang]
+symbol = ""
+format = "go:[$version]($style) "
+style = "cyan"
+detect_files = ["go.mod"]
+
+# Prompt
+[character]
+success_symbol = "[>](green)"
+error_symbol = "[>](red)"
