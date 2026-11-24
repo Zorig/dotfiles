@@ -1,6 +1,12 @@
 return {
   "snacks.nvim",
   opts = {
+    scroll = { enabled = false }, -- no smooth-scroll animation
+    picker = {
+      sources = {
+        explorer = { layout = { layout = { position = "right" } } }, -- file tree on the right
+      },
+    },
     dashboard = {
       preset = {
         pick = function(cmd, opts)
