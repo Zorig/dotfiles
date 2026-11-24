@@ -58,6 +58,7 @@ export NVM_DIR="$HOME/.nvm"
 	[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 	[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completionc
 export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 function git_current_branch() {
   local ref
@@ -92,7 +93,6 @@ if [ -f '/Users/zorig/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/zorig/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/zorig/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-. "$HOME/.local/bin/env"
 source <(fzf --zsh)
 
 # opencode
