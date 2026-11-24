@@ -19,15 +19,11 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
-    { import = "lazyvim.plugins.extras.ai.copilot" },
-    { import = "lazyvim.plugins.extras.ai.copilot-chat" },
     -- { import = "lazyvim.plugins.extras.coding.mini-surround" },
     -- { import = "lazyvim.plugins.extras.editor.refactoring" },
     -- { import = "lazyvim.plugins.extras.formatting.black" },
     -- { import = "lazyvim.plugins.extras.formatting.prettier" },
-    { import = "lazyvim.plugins.extras.lang.python" },
     -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.linting.eslint" },
     -- { import = "lazyvim.plugins.extras.lsp.none-ls" },
 
@@ -49,7 +45,7 @@ require("lazy").setup({
   },
   install = { colorscheme = { "tokyonight" } },
   checker = {
-    enabled = true, -- check for plugin updates periodically
+    enabled = false, -- no background git fetches; update manually with :Lazy
     notify = false, -- notify on update
   }, -- automatically check for plugin updates
   performance = {
